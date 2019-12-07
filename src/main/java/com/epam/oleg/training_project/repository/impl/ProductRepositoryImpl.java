@@ -17,4 +17,19 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Product getById(String id) {
         return null;
     }
+
+    @Override
+    public Product create(Product product) {
+        return null;
+    }
+
+    @Override
+    public Product update(Product product) {
+        return null;
+    }
+
+    @Override
+    public void delete(String id) {
+
+    }
 }

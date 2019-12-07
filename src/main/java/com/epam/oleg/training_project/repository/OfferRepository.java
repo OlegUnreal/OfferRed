@@ -8,4 +8,10 @@ public interface OfferRepository {
     List<Offer> getAll();
 
     Offer getById(String id);
+
+    Offer save(Offer offer);
+
+    Offer update(Offer offer);
+
+    void delete(String id);
 }

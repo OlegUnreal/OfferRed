@@ -1,9 +1,9 @@
 package com.epam.oleg.training_project.rest.vo;
 
+import com.epam.oleg.training_project.entities.OfferStatus;
 import lombok.Data;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 public class OfferVO {

@@ -24,4 +24,19 @@ public class OfferRepositoryImpl implements OfferRepository {
     public Offer getById(String id) {
         return null;
     }
+
+    @Override
+    public Offer save(Offer offer) {
+        return null;
+    }
+
+    @Override
+    public Offer update(Offer offer) {
+        return null;
+    }
+
+    @Override
+    public void delete(String id) {
+
+    }
 }

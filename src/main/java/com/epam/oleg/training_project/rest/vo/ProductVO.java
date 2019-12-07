@@ -1,8 +1,7 @@
 package com.epam.oleg.training_project.rest.vo;
 
+import com.epam.oleg.training_project.entities.ProductCategory;
 import lombok.Data;
-
-import java.util.UUID;
 
 @Data
 public class ProductVO {

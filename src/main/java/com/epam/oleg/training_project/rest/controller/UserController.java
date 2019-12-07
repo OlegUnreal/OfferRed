@@ -1,12 +1,11 @@
 package com.epam.oleg.training_project.rest.controller;
 
 import com.epam.oleg.training_project.entities.User;
-import com.epam.oleg.training_project.repository.UserRepository;
+import com.epam.oleg.training_project.rest.vo.UserVO;
+import com.epam.oleg.training_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,15 +13,30 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping
-    public List<User> getAll() {
-        return userRepository.getAll();
+    public ResponseEntity<List<User>> getAll() {
+        return ResponseEntity.ok(userService.getAll());
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
-        return userRepository.getById(id);
+    public ResponseEntity<User> getUser(@PathVariable String id) {
+        return ResponseEntity.ok(userService.getById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody UserVO userVO) {
+        return ResponseEntity.ok(userService.create(userVO));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@RequestBody UserVO userVO) {
+        return ResponseEntity.ok(userService.update(userVO));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable String id) {
+        userService.delete(id);
     }
 }

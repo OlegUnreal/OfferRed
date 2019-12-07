@@ -17,4 +17,19 @@ public class UserRepositoryImpl implements UserRepository {
     public User getById(String id) {
         return null;
     }
+
+    @Override
+    public User create(User user) {
+        return null;
+    }
+
+    @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
+    public void delete(String id) {
+
+    }
 }

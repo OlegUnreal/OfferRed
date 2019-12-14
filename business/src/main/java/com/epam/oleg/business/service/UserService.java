@@ -1,18 +1,19 @@
-package com.epam.oleg.training_project.service;
+package com.epam.oleg.business.service;
 
-import com.epam.oleg.training_project.entities.User;
-import com.epam.oleg.training_project.rest.vo.UserVO;
+import com.epam.oleg.business.entities.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
     List<User> getAll();
 
     User getById(String id);
 
-    User create(UserVO userVO);
+    User create(User user);
 
-    User update(UserVO userVO);
+    User update(User userVO);
 
     void delete(String id);
 }

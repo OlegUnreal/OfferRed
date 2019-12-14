@@ -1,8 +1,8 @@
-package com.epam.oleg.training_project.repository.impl;
+package com.epam.oleg.business.repository.impl;
 
-import com.epam.oleg.training_project.entities.Offer;
-import com.epam.oleg.training_project.entities.OfferStatus;
-import com.epam.oleg.training_project.repository.OfferRepository;
+import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.OfferStatus;
+import com.epam.oleg.business.repository.OfferRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;

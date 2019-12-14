@@ -1,10 +1,8 @@
-package com.epam.oleg.training_project.service.impl;
+package com.epam.oleg.business.service.impl;
 
-import com.epam.oleg.training_project.entities.Offer;
-import com.epam.oleg.training_project.repository.OfferRepository;
-import com.epam.oleg.training_project.rest.vo.OfferVO;
-import com.epam.oleg.training_project.service.OfferService;
-import com.epam.oleg.training_project.utils.mapper.OfferMapper;
+import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.repository.OfferRepository;
+import com.epam.oleg.business.service.OfferService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,6 @@ import java.util.List;
 public class OfferServiceImpl implements OfferService {
 
     private OfferRepository offerRepository;
-    private OfferMapper offerMapper;
 
     @Override
     public List<Offer> getAll() {
@@ -28,14 +25,12 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public Offer save(OfferVO offerVO) {
-        Offer offer = offerMapper.toEntity(offerVO);
+    public Offer save(Offer offer) {
         return offerRepository.save(offer);
     }
 
     @Override
-    public Offer update(OfferVO offerVO) {
-        Offer offer = offerMapper.toEntity(offerVO);
+    public Offer update(Offer offer) {
         return offerRepository.update(offer);
     }
 

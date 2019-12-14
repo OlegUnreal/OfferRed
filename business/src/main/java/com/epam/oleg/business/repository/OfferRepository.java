@@ -1,6 +1,6 @@
-package com.epam.oleg.training_project.repository;
+package com.epam.oleg.business.repository;
 
-import com.epam.oleg.training_project.entities.Offer;
+import com.epam.oleg.business.entities.Offer;
 
 import java.util.List;
 

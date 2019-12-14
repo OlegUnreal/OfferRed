@@ -1,18 +1,19 @@
-package com.epam.oleg.training_project.service;
+package com.epam.oleg.business.service;
 
-import com.epam.oleg.training_project.entities.Product;
-import com.epam.oleg.training_project.rest.vo.ProductVO;
+import com.epam.oleg.business.entities.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface ProductService {
     List<Product> getAll();
 
     Product getById(String id);
 
-    Product create(ProductVO productVO);
+    Product create(Product product);
 
-    Product update(ProductVO productVO);
+    Product update(Product product);
 
     void delete(String id);
 }

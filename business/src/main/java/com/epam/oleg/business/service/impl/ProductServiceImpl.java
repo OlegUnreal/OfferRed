@@ -1,10 +1,8 @@
-package com.epam.oleg.training_project.service.impl;
+package com.epam.oleg.business.service.impl;
 
-import com.epam.oleg.training_project.entities.Product;
-import com.epam.oleg.training_project.repository.ProductRepository;
-import com.epam.oleg.training_project.rest.vo.ProductVO;
-import com.epam.oleg.training_project.service.ProductService;
-import com.epam.oleg.training_project.utils.mapper.ProductMapper;
+import com.epam.oleg.business.entities.Product;
+import com.epam.oleg.business.repository.ProductRepository;
+import com.epam.oleg.business.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,6 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
-    private ProductMapper productMapper;
 
     @Override
     public List<Product> getAll() {
@@ -28,14 +25,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product create(ProductVO productVO) {
-        Product product = productMapper.toEntity(productVO);
+    public Product create(Product product) {
         return productRepository.create(product);
     }
 
     @Override
-    public Product update(ProductVO productVO) {
-        Product product = productMapper.toEntity(productVO);
+    public Product update(Product product) {
         return productRepository.update(product);
     }
 

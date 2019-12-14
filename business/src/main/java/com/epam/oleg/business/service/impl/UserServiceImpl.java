@@ -1,10 +1,8 @@
-package com.epam.oleg.training_project.service.impl;
+package com.epam.oleg.business.service.impl;
 
-import com.epam.oleg.training_project.entities.User;
-import com.epam.oleg.training_project.repository.UserRepository;
-import com.epam.oleg.training_project.rest.vo.UserVO;
-import com.epam.oleg.training_project.service.UserService;
-import com.epam.oleg.training_project.utils.mapper.UserMapper;
+import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.repository.UserRepository;
+import com.epam.oleg.business.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-    private UserMapper userMapper;
 
     @Override
     public List<User> getAll() {
@@ -28,14 +25,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(UserVO userVO) {
-        User user = userMapper.toEntity(userVO);
+    public User create(User user) {
         return userRepository.create(user);
     }
 
     @Override
-    public User update(UserVO userVO) {
-        User user = userMapper.toEntity(userVO);
+    public User update(User user) {
         return userRepository.update(user);
     }
 

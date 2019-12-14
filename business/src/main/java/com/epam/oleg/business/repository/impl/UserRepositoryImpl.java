@@ -1,7 +1,7 @@
-package com.epam.oleg.training_project.repository.impl;
+package com.epam.oleg.business.repository.impl;
 
-import com.epam.oleg.training_project.entities.User;
-import com.epam.oleg.training_project.repository.UserRepository;
+import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

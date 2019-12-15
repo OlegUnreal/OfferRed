@@ -1,11 +1,9 @@
 package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.User;
-import com.epam.oleg.business.service.UserService;
 import com.epam.oleg.business.service.impl.UserServiceImpl;
-import com.epam.oleg.web.mapper.UserMapper;
+import com.epam.oleg.web.mapper.dozer.UserMapper;
 import com.epam.oleg.web.rest.vo.UserVO;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +15,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private  UserServiceImpl userService;
-    @Autowired
-    private  UserMapper userMapper;
 
     @GetMapping
     public ResponseEntity<List<User>> getAll() {
@@ -32,13 +28,13 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody UserVO userVO) {
-        User user = userMapper.toEntity(userVO);
+        User user = UserMapper.toEntity(userVO);
         return ResponseEntity.ok(userService.create(user));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestBody UserVO userVO) {
-        User user = userMapper.toEntity(userVO);
+        User user = UserMapper.toEntity(userVO);
         return ResponseEntity.ok(userService.update(user));
     }
 

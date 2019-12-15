@@ -2,7 +2,7 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.service.ProductService;
-import com.epam.oleg.web.mapper.ProductMapper;
+import com.epam.oleg.web.mapper.dozer.ProductMapper;
 import com.epam.oleg.web.rest.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +16,6 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductMapper productMapper;
 
     @GetMapping
     public List<Product> getAll() {
@@ -31,14 +29,14 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody ProductVO productVO) {
-        Product product = productMapper.toEntity(productVO);
+        Product product = ProductMapper.toEntity(productVO);
         return ResponseEntity.ok(productService.create(product));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody ProductVO productVO) {
         productVO.setId(id);
-        Product product = productMapper.toEntity(productVO);
+        Product product = ProductMapper.toEntity(productVO);
         return ResponseEntity.ok(productService.update(product));
     }
 

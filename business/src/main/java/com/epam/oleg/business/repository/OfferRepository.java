@@ -1,17 +1,7 @@
 package com.epam.oleg.business.repository;
 
-import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.repository.dto.OfferDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface OfferRepository {
-    List<Offer> getAll();
-
-    Offer getById(String id);
-
-    Offer save(Offer offer);
-
-    Offer update(Offer offer);
-
-    void delete(String id);
+public interface OfferRepository extends JpaRepository<OfferDTO, String> {
 }

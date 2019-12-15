@@ -1,17 +1,7 @@
 package com.epam.oleg.business.repository;
 
-import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.repository.dto.UserDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface UserRepository {
-    List<User> getAll();
-
-    User getById(String id);
-
-    User create(User user);
-
-    User update(User user);
-
-    void delete(String id);
+public interface UserRepository extends JpaRepository<UserDTO, String> {
 }

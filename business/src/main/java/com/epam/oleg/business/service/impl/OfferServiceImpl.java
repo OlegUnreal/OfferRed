@@ -1,16 +1,13 @@
 package com.epam.oleg.business.service.impl;
 
 import com.epam.oleg.business.entities.Offer;
-import com.epam.oleg.business.mapper.OfferMapper;
+import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.OfferRepository;
-import com.epam.oleg.business.repository.dto.OfferDTO;
 import com.epam.oleg.business.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -20,30 +17,26 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public List<Offer> getAll() {
-        return offerRepository.findAll().stream()
-                .map(OfferMapper::toEntity)
-                .collect(Collectors.toList());
+        return offerRepository.findAll();
     }
 
     @Override
     public Offer getById(String id) {
-        Optional<OfferDTO> offerDTO = offerRepository.findById(id);
-        return offerDTO.map(OfferMapper::toEntity).orElse(null);
+        return offerRepository.findById(id).orElseThrow((() -> new NotFoundException("User with id " + id
+                + " not found")));
     }
 
     @Override
     public Offer save(Offer offer) {
-        OfferDTO offerDTO = offerRepository.save(OfferMapper.toDto(offer));
-        return OfferMapper.toEntity(offerDTO);
+        return offerRepository.save(offer);
     }
 
     @Override
     public Offer update(Offer offer) {
         if (offerRepository.existsById(offer.getId())) {
-            return OfferMapper.toEntity(offerRepository.save(OfferMapper.toDto(offer)));
+            return offerRepository.save(offer);
         }
-        //Exception should be thrown
-        return null;
+        throw new NotFoundException("Can't update offer with id " + offer.getId() + ". Offer not found");
     }
 
     @Override

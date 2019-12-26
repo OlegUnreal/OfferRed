@@ -1,16 +1,14 @@
 package com.epam.oleg.business.service.impl;
 
 import com.epam.oleg.business.entities.User;
-import com.epam.oleg.business.mapper.UserMapper;
+import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.UserRepository;
-import com.epam.oleg.business.repository.dto.UserDTO;
 import com.epam.oleg.business.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,30 +17,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return userRepository.findAll().stream()
-                .map(UserMapper::toEntity)
-                .collect(Collectors.toList());
+        return userRepository.findAll();
     }
 
     @Override
     public User getById(String id) {
-        Optional<UserDTO> userDTO = userRepository.findById(id);
-        return userDTO.map(UserMapper::toEntity).orElse(null);
+        Optional<User> userDTO = userRepository.findById(id);
+        return userDTO.orElseThrow(() -> new NotFoundException("User with id " + id + " not found"));
     }
 
     @Override
     public User create(User user) {
-        UserDTO userDTO = userRepository.save(UserMapper.toDto(user));
-        return UserMapper.toEntity(userDTO);
+        return userRepository.save(user);
     }
 
     @Override
     public User update(User user) {
         if (userRepository.existsById(user.getId())) {
-            return UserMapper.toEntity(userRepository.save(UserMapper.toDto(user)));
+            return userRepository.save(user);
         }
-        //Exception should be thrown
-        return null;
+        throw new NotFoundException("Can't update user with id " + user.getId() + ". Product not found");
     }
 
     @Override

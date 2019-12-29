@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTable
+      author: Oleg Kornii
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: script/create_products_users_offers.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: insertTableAddresses
+      author: Oleg Kornii
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: script/insert_products_users_offers.sql
+            relativeToChangelogFile: true

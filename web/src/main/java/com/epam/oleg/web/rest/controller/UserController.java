@@ -5,40 +5,46 @@ import com.epam.oleg.business.service.impl.UserServiceImpl;
 import com.epam.oleg.web.mapper.dozer.UserMapper;
 import com.epam.oleg.web.rest.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private  UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.ok(userService.getAll());
+    @ResponseStatus(HttpStatus.OK)
+    public Page<User> getAll(@RequestParam(required = false) @PageableDefault Pageable pageable) {
+        return userService.getAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable String id) {
-        return ResponseEntity.ok(userService.getById(id));
+    @ResponseStatus(HttpStatus.OK)
+    public User getUser(@PathVariable String id) {
+        return userService.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserVO userVO) {
+    @ResponseStatus(HttpStatus.OK)
+    public User createUser(@RequestBody UserVO userVO) {
         User user = UserMapper.toEntity(userVO);
-        return ResponseEntity.ok(userService.create(user));
+        return userService.create(user);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody UserVO userVO) {
+    @ResponseStatus(HttpStatus.OK)
+    public User updateUser(@RequestBody UserVO userVO) {
         User user = UserMapper.toEntity(userVO);
-        return ResponseEntity.ok(userService.update(user));
+        return userService.update(user);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK, reason = "Offer deleted successfully")
     public void deleteUser(@PathVariable String id) {
         userService.delete(id);
     }

@@ -5,9 +5,10 @@ import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.ProductRepository;
 import com.epam.oleg.business.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getAll() {
-        return productRepository.findAll();
+    public Page<Product> getAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override

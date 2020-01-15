@@ -5,6 +5,9 @@ import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.web.mapper.dozer.ProductMapper;
 import com.epam.oleg.web.rest.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,26 +21,30 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public List<Product> getAll() {
-        return productService.getAll();
+    @ResponseStatus(HttpStatus.OK)
+    public Page<Product> getAll(@RequestParam(required = false) @PageableDefault Pageable pageable) {
+        return productService.getAll(pageable);
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Product getProduct(@PathVariable String id) {
         return productService.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody ProductVO productVO) {
+    @ResponseStatus(HttpStatus.OK)
+    public Product createProduct(@RequestBody ProductVO productVO) {
         Product product = ProductMapper.toEntity(productVO);
-        return ResponseEntity.ok(productService.create(product));
+        return productService.create(product);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody ProductVO productVO) {
+    @ResponseStatus(HttpStatus.OK)
+    public Product updateProduct(@PathVariable String id, @RequestBody ProductVO productVO) {
         productVO.setId(id);
         Product product = ProductMapper.toEntity(productVO);
-        return ResponseEntity.ok(productService.update(product));
+        return productService.update(product);
     }
 
     @DeleteMapping("/{id}")

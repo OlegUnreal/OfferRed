@@ -5,9 +5,9 @@ import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.OfferRepository;
 import com.epam.oleg.business.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -16,8 +16,8 @@ public class OfferServiceImpl implements OfferService {
     private OfferRepository offerRepository;
 
     @Override
-    public List<Offer> getAll() {
-        return offerRepository.findAll();
+    public Page<Offer> getAll(Pageable pageable) {
+        return offerRepository.findAll(pageable);
     }
 
     @Override

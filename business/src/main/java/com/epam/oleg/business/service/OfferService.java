@@ -1,13 +1,13 @@
 package com.epam.oleg.business.service;
 
 import com.epam.oleg.business.entities.Offer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface OfferService {
-    List<Offer> getAll();
+    Page<Offer> getAll(Pageable pageable);
 
     Offer getById(String id);
 

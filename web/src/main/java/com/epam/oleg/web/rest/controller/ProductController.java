@@ -9,10 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/products")
@@ -22,7 +21,7 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<Product> getAll(@RequestParam(required = false) @PageableDefault Pageable pageable) {
+    public Page<Product> getAll(@PageableDefault Pageable pageable) {
         return productService.getAll(pageable);
     }
 
@@ -34,14 +33,14 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Product createProduct(@RequestBody ProductVO productVO) {
+    public Product createProduct(@Valid @RequestBody ProductVO productVO) {
         Product product = ProductMapper.toEntity(productVO);
         return productService.create(product);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Product updateProduct(@PathVariable String id, @RequestBody ProductVO productVO) {
+    public Product updateProduct(@PathVariable String id, @Valid @RequestBody ProductVO productVO) {
         productVO.setId(id);
         Product product = ProductMapper.toEntity(productVO);
         return productService.update(product);

@@ -11,6 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/offers")
 public class OfferController {
@@ -19,7 +21,7 @@ public class OfferController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<Offer> getAll(@RequestParam(required = false) @PageableDefault Pageable pageable) {
+    public Page<Offer> getAll(@PageableDefault Pageable pageable) {
         return offerService.getAll(pageable);
     }
 
@@ -31,14 +33,14 @@ public class OfferController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Offer createOffer(@RequestBody OfferVO offerVO) {
+    public Offer createOffer(@Valid @RequestBody OfferVO offerVO) {
         Offer offer = OfferMapper.toEntity(offerVO);
         return offerService.save(offer);
     }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Offer updateOffer(@PathVariable String id, @RequestBody OfferVO offerVO) {
+    public Offer updateOffer(@PathVariable String id, @Valid @RequestBody OfferVO offerVO) {
         offerVO.setId(id);
         Offer offer = OfferMapper.toEntity(offerVO);
         return offerService.update(offer);

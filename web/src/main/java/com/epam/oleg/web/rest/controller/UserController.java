@@ -11,6 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<User> getAll(@RequestParam(required = false) @PageableDefault Pageable pageable) {
+    public Page<User> getAll(@PageableDefault Pageable pageable) {
         return userService.getAll(pageable);
     }
 
@@ -31,14 +33,14 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public User createUser(@RequestBody UserVO userVO) {
+    public User createUser(@RequestBody @Valid UserVO userVO) {
         User user = UserMapper.toEntity(userVO);
         return userService.create(user);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User updateUser(@RequestBody UserVO userVO) {
+    public User updateUser(@RequestBody @Valid UserVO userVO) {
         User user = UserMapper.toEntity(userVO);
         return userService.update(user);
     }

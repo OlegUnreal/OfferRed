@@ -2,8 +2,8 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.impl.UserServiceImpl;
-import com.epam.oleg.web.mapper.dozer.UserMapper;
-import com.epam.oleg.web.rest.vo.UserVO;
+import com.epam.oleg.web.rest.vo.UserDTO;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,15 +33,17 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public User createUser(@RequestBody @Valid UserVO userVO) {
-        User user = UserMapper.toEntity(userVO);
+    public User createUser(@RequestBody @Valid UserDTO userDTO) {
+        User user = DozerBeanMapperBuilder.buildDefault()
+                .map(userDTO, User.class);
         return userService.create(user);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User updateUser(@RequestBody @Valid UserVO userVO) {
-        User user = UserMapper.toEntity(userVO);
+    public User updateUser(@RequestBody @Valid UserDTO userDTO) {
+        User user = DozerBeanMapperBuilder.buildDefault()
+                .map(userDTO, User.class);
         return userService.update(user);
     }
 

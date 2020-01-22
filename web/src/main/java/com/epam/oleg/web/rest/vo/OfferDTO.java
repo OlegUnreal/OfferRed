@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-public class OfferVO {
+public class OfferDTO {
     @NotNull(message = "Id cannot be null")
     @NotEmpty(message = "Id cannot be empty")
     private String id;
@@ -17,5 +17,5 @@ public class OfferVO {
     private OfferStatus offerStatus;
 
     @NotNull(message = "Products cannot be null")
-    private List<@NotNull ProductVO> productVOS;
+    private List<@NotNull ProductDTO> products;
 }

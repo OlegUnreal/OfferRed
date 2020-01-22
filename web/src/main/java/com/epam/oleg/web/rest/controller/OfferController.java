@@ -2,8 +2,8 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.service.OfferService;
-import com.epam.oleg.web.mapper.dozer.OfferMapper;
-import com.epam.oleg.web.rest.vo.OfferVO;
+import com.epam.oleg.web.rest.vo.OfferDTO;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,16 +33,18 @@ public class OfferController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Offer createOffer(@Valid @RequestBody OfferVO offerVO) {
-        Offer offer = OfferMapper.toEntity(offerVO);
+    public Offer createOffer(@Valid @RequestBody OfferDTO offerDTO) {
+        Offer offer = DozerBeanMapperBuilder.buildDefault()
+                .map(offerDTO, Offer.class);
         return offerService.save(offer);
     }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Offer updateOffer(@PathVariable String id, @Valid @RequestBody OfferVO offerVO) {
-        offerVO.setId(id);
-        Offer offer = OfferMapper.toEntity(offerVO);
+    public Offer updateOffer(@PathVariable String id, @Valid @RequestBody OfferDTO offerDTO) {
+        offerDTO.setId(id);
+        Offer offer = DozerBeanMapperBuilder.buildDefault()
+                .map(offerDTO, Offer.class);
         return offerService.update(offer);
     }
 

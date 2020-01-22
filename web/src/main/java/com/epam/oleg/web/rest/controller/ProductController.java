@@ -2,8 +2,8 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.service.ProductService;
-import com.epam.oleg.web.mapper.dozer.ProductMapper;
-import com.epam.oleg.web.rest.vo.ProductVO;
+import com.epam.oleg.web.rest.vo.ProductDTO;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,16 +33,18 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Product createProduct(@Valid @RequestBody ProductVO productVO) {
-        Product product = ProductMapper.toEntity(productVO);
+    public Product createProduct(@Valid @RequestBody ProductDTO productDTO) {
+        Product product = DozerBeanMapperBuilder.buildDefault()
+                .map(productDTO, Product.class);
         return productService.create(product);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Product updateProduct(@PathVariable String id, @Valid @RequestBody ProductVO productVO) {
-        productVO.setId(id);
-        Product product = ProductMapper.toEntity(productVO);
+    public Product updateProduct(@PathVariable String id, @Valid @RequestBody ProductDTO productDTO) {
+        productDTO.setId(id);
+        Product product = DozerBeanMapperBuilder.buildDefault()
+                .map(productDTO, Product.class);
         return productService.update(product);
     }
 

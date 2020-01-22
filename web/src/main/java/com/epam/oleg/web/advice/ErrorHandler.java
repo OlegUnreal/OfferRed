@@ -1,4 +1,4 @@
-package com.epam.oleg.business.advice;
+package com.epam.oleg.web.advice;
 
 import com.epam.oleg.business.exception.NotFoundException;
 import org.springframework.http.HttpStatus;

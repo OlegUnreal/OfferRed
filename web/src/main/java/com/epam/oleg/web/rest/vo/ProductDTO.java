@@ -23,6 +23,5 @@ public class ProductDTO {
     @Min(value = 0, message = "Price cannot be less than 0")
     private int price;
 
-    @NotNull(message = "Product owner cannot be null")
     private UserDTO productOwner;
 }

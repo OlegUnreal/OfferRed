@@ -4,7 +4,7 @@ import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.impl.UserServiceImpl;
 import com.epam.oleg.web.rest.vo.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,8 +15,9 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor
 public class UserController {
-    @Autowired
+
     private UserServiceImpl userService;
 
     @GetMapping

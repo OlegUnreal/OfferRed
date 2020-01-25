@@ -1,6 +1,7 @@
 package com.epam.oleg.web.rest.vo;
 
 import com.epam.oleg.business.entities.OfferStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +17,14 @@ public class OfferDTO {
     @NotNull(message = "OfferStatus cannot be null")
     private OfferStatus offerStatus;
 
-    @NotNull(message = "Products cannot be null")
-    private List<@NotNull ProductDTO> products;
+    @JsonIgnore
+    private List<ProductDTO> products;
+
+    @JsonIgnore
+    private UserDTO offerOwner;
+
+    @NotNull(message = "Product ids list cannot be null")
+    @NotEmpty(message = "Product ids list cannot be empty")
+    private List<@NotEmpty(message = "Product id cannot be empty")
+    @NotNull(message = "Product id cannot be null") String> productsIds;
 }

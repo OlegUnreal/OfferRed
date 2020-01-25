@@ -4,17 +4,17 @@ import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.UserRepository;
 import com.epam.oleg.business.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
+
     private UserRepository userRepository;
 
     @Override

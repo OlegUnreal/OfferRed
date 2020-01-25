@@ -4,7 +4,7 @@ import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.ProductRepository;
 import com.epam.oleg.business.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
-    @Autowired
+
     private ProductRepository productRepository;
 
     @Override

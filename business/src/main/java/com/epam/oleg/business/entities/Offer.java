@@ -11,6 +11,7 @@ import java.util.List;
 public class Offer {
     @Id
     private String id;
+    @Enumerated(EnumType.STRING)
     private OfferStatus offerStatus;
     @ManyToOne
     @JoinColumn

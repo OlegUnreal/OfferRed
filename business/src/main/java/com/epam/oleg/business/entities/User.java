@@ -2,10 +2,7 @@ package com.epam.oleg.business.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -15,9 +12,9 @@ public class User {
     @Id
     private String id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    @OneToMany(mappedBy = "productOwner")
-    private List<Product> products;
-    @OneToMany(mappedBy = "offerOwner")
-    private List<Offer> offers;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    private String city;
 }

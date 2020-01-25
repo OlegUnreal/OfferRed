@@ -11,6 +11,7 @@ public class Product {
     @Id
     private String id;
     private String name;
+    @Enumerated(EnumType.STRING)
     private ProductCategory category;
     private int price;
     @ManyToOne

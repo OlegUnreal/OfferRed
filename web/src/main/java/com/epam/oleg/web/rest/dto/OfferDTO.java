@@ -1,4 +1,4 @@
-package com.epam.oleg.web.rest.vo;
+package com.epam.oleg.web.rest.dto;
 
 import com.epam.oleg.business.entities.OfferStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;

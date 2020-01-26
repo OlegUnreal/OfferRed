@@ -1,13 +1,14 @@
 package com.epam.oleg.web.rest.controller;
 
-import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.Offer;
-import com.epam.oleg.business.entities.UserRole;
+import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.OfferService;
 import com.epam.oleg.business.service.ProductService;
-import com.epam.oleg.web.rest.vo.OfferDTO;
-import com.epam.oleg.web.rest.vo.ProductDTO;
-import com.epam.oleg.web.rest.vo.UserDTO;
+import com.epam.oleg.business.service.UserService;
+import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
+import com.epam.oleg.web.rest.dto.OfferDTO;
+import com.epam.oleg.web.rest.dto.ProductDTO;
+import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ public class OfferController {
 
     private OfferService offerService;
     private ProductService productService;
+    private UserService userService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -43,15 +45,9 @@ public class OfferController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public Offer createOffer(@Valid @RequestBody OfferDTO offerDTO) {
-        //Product and User should be taken from repo
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId("1");
-        userDTO.setName("Oleg");
-        userDTO.setUserRole(UserRole.ADMIN);
-        userDTO.setCity("Lviv");
-        userDTO.setGender(Gender.MALE);
-        userDTO.setAge(22);
-        offerDTO.setOfferOwner(userDTO);
+        User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
+        offerDTO.setOfferOwner(DozerBeanMapperBuilder.buildDefault()
+                .map(user, UserDTO.class));
 
         List<ProductDTO> products = new ArrayList<>();
         offerDTO.getProductsIds().forEach(id -> products.add(DozerBeanMapperBuilder.buildDefault()

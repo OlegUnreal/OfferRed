@@ -1,11 +1,12 @@
 package com.epam.oleg.web.rest.controller;
 
-import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.Product;
-import com.epam.oleg.business.entities.UserRole;
+import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.ProductService;
-import com.epam.oleg.web.rest.vo.ProductDTO;
-import com.epam.oleg.web.rest.vo.UserDTO;
+import com.epam.oleg.business.service.UserService;
+import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
+import com.epam.oleg.web.rest.dto.ProductDTO;
+import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 public class ProductController {
 
     private ProductService productService;
+    private UserService userService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -38,14 +40,9 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public Product createProduct(@Valid @RequestBody ProductDTO productDTO) {
-        //should be taken from security credentials, and repository
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId("1");
-        userDTO.setName("Oleg");
-        userDTO.setUserRole(UserRole.ADMIN);
-        userDTO.setGender(Gender.MALE);
-        userDTO.setCity("Lviv");
-        productDTO.setProductOwner(userDTO);
+        User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
+        productDTO.setProductOwner(DozerBeanMapperBuilder.buildDefault()
+                .map(user, UserDTO.class));
         Product product = DozerBeanMapperBuilder.buildDefault()
                 .map(productDTO, Product.class);
         return productService.create(product);

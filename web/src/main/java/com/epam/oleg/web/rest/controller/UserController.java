@@ -2,7 +2,7 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.impl.UserServiceImpl;
-import com.epam.oleg.web.rest.vo.UserDTO;
+import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

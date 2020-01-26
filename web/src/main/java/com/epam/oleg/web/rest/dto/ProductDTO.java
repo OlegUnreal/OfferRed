@@ -1,6 +1,7 @@
 package com.epam.oleg.web.rest.dto;
 
 import com.epam.oleg.business.entities.ProductCategory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -9,8 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class ProductDTO {
-    @NotNull(message = "Id cannot be null")
-    @NotEmpty(message = "Id cannot be empty")
+    @JsonIgnore
     private String id;
 
     @NotNull(message = "Name cannot be null")

@@ -10,8 +10,7 @@ import java.util.List;
 
 @Data
 public class OfferDTO {
-    @NotNull(message = "Id cannot be null")
-    @NotEmpty(message = "Id cannot be empty")
+    @JsonIgnore
     private String id;
 
     @NotNull(message = "OfferStatus cannot be null")

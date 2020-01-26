@@ -2,6 +2,7 @@ package com.epam.oleg.web.rest.dto;
 
 import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -11,8 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class UserDTO {
-    @NotNull(message = "Id cannot be null")
-    @NotEmpty(message = "Id cannot be empty")
+    @JsonIgnore
     private String id;
 
     @NotNull(message = "Name cannot be null")

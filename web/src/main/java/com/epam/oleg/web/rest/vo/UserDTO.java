@@ -4,6 +4,7 @@ import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.UserRole;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,10 +19,19 @@ public class UserDTO {
     @NotEmpty(message = "Name cannot be empty")
     private String name;
 
+    @NotNull(message = "Email cannot be null")
+    @NotEmpty(message = "Email cannot be empty")
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @NotNull(message = "Password cannot be null")
+    @NotEmpty(message = "Password cannot be empty")
+    private String password;
+
     @NotNull(message = "User role cannot be null")
     private UserRole userRole;
 
-    @Min(value = 0, message = "Age cannot be less than 0")
+    @Min(value = 1, message = "Age cannot be less than 0")
     private int age;
     @NotNull(message = "Gender cannot be null")
     private Gender gender;

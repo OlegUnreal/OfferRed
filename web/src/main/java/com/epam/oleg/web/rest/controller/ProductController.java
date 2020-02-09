@@ -2,6 +2,7 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.repository.ProductCriteria;
 import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.business.service.UserService;
 import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -24,11 +26,16 @@ public class ProductController {
 
     private ProductService productService;
     private UserService userService;
+    private ProductCriteria productCriteria;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<Product> getAll(@PageableDefault Pageable pageable) {
-        return productService.getAll(pageable);
+    public List<Product> getAll(@PageableDefault Pageable pageable,
+                                @RequestParam(required = false) String name,
+                                @RequestParam(required = false) String category,
+                                @RequestParam(required = false) Integer price,
+                                @RequestParam(required = false) String productOwner) {
+        return productCriteria.findAll(name, category, price, productOwner);
     }
 
     @GetMapping("/{id}")

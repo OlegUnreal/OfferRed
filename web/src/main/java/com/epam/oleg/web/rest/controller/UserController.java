@@ -1,11 +1,13 @@
 package com.epam.oleg.web.rest.controller;
 
+import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.entities.UserRole;
+import com.epam.oleg.business.repository.UserCriteria;
 import com.epam.oleg.business.service.impl.UserServiceImpl;
 import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -20,11 +23,18 @@ import javax.validation.Valid;
 public class UserController {
 
     private UserServiceImpl userService;
+    private UserCriteria userCriteria;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<User> getAll(@PageableDefault Pageable pageable) {
-        return userService.getAll(pageable);
+    public List<User> getAll(@PageableDefault Pageable pageable,
+                             @RequestParam(required = false) String email,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) UserRole userRole,
+                             @RequestParam(required = false) Gender gender,
+                             @RequestParam(required = false) String city,
+                             @RequestParam(required = false) Integer age) {
+        return userCriteria.findAll(email, name, userRole, gender, city, age);
     }
 
     @GetMapping("/{id}")

@@ -2,6 +2,7 @@ package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.repository.OfferCriteria;
 import com.epam.oleg.business.service.OfferService;
 import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.business.service.UserService;
@@ -29,11 +30,15 @@ public class OfferController {
     private OfferService offerService;
     private ProductService productService;
     private UserService userService;
+    private OfferCriteria offerCriteria;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<Offer> getAll(@PageableDefault Pageable pageable) {
-        return offerService.getAll(pageable);
+    public List<Offer> getAll(@PageableDefault Pageable pageable,
+                              @RequestParam(required = false) String offerStatus,
+                              @RequestParam(required = false) String ownerName,
+                              @RequestParam(required = false) String productName) {
+        return offerCriteria.findAll(offerStatus, ownerName, productName);
     }
 
     @GetMapping("/{id}")

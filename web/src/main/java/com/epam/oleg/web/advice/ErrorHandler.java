@@ -5,6 +5,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -41,5 +42,10 @@ public class ErrorHandler {
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<Object> handleMethodNotSupported(Exception e) {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(e.getMessage());
+    }
+
+    @ExceptionHandler(value = AccessDeniedException.class)
+    public ResponseEntity<Object> handleAccessDenied(Exception e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 }

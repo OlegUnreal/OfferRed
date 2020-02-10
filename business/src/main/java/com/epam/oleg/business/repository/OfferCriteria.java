@@ -1,6 +1,7 @@
 package com.epam.oleg.business.repository;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +18,7 @@ public class OfferCriteria {
 
     private final EntityManager entityManager;
 
-    public List<Offer> findAll(String offerStatus, String ownerName, String productName) {
+    public List<Offer> findAll(String offerStatus, String offerOwner, String productId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Offer> cq = criteriaBuilder.createQuery(Offer.class);
         Root<Offer> offer = cq.from(Offer.class);
@@ -27,10 +28,16 @@ public class OfferCriteria {
             cq.where(offerStatusPredicate);
         }
 
-        if (StringUtils.isNotEmpty(ownerName)) {
+        if (StringUtils.isNotEmpty(offerOwner)) {
+            Join<Offer, User> offerUserJoin = offer.join("offerOwner", JoinType.LEFT);
+            offerUserJoin.on(criteriaBuilder.equal(offerUserJoin.get("id"), offerOwner));
+            cq.where(offerUserJoin.getOn());
         }
 
-        if(StringUtils.isNotEmpty(productName)) {
+        if (StringUtils.isNotEmpty(productId)) {
+            Join<Offer, Product> offerProductJoin = offer.join("products", JoinType.LEFT);
+            offerProductJoin.on(criteriaBuilder.equal(offerProductJoin.get("id"), productId));
+            cq.where(offerProductJoin.getOn());
         }
 
         TypedQuery<Offer> query = entityManager.createQuery(cq);

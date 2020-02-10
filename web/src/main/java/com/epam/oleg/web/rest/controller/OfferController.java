@@ -6,17 +6,18 @@ import com.epam.oleg.business.repository.OfferCriteria;
 import com.epam.oleg.business.service.OfferService;
 import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.business.service.UserService;
+import com.epam.oleg.web.hateos.assembler.OfferModelAssembler;
+import com.epam.oleg.web.hateos.model.OfferModel;
 import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
 import com.epam.oleg.web.rest.dto.OfferDTO;
 import com.epam.oleg.web.rest.dto.ProductDTO;
 import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,25 +34,26 @@ public class OfferController {
     private ProductService productService;
     private UserService userService;
     private OfferCriteria offerCriteria;
+    private OfferModelAssembler assembler;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Offer> getAll(@PageableDefault Pageable pageable,
-                              @RequestParam(required = false) String offerStatus,
-                              @RequestParam(required = false) String ownerName,
-                              @RequestParam(required = false) String productName) {
-        return offerCriteria.findAll(offerStatus, ownerName, productName);
+    public CollectionModel<OfferModel> getAll(@PageableDefault Pageable pageable,
+                                              @RequestParam(required = false) String offerStatus,
+                                              @RequestParam(required = false) String ownerName,
+                                              @RequestParam(required = false) String productName) {
+        return assembler.toCollectionModel(offerCriteria.findAll(offerStatus, ownerName, productName));
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Offer getOffer(@PathVariable String id) {
-        return offerService.getById(id);
+    public OfferModel getOffer(@PathVariable String id) {
+        return assembler.toModel(offerService.getById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public Offer createOffer(@Valid @RequestBody OfferDTO offerDTO) {
+    public OfferModel createOffer(@Valid @RequestBody OfferDTO offerDTO) {
         User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
         offerDTO.setOfferOwner(DozerBeanMapperBuilder.buildDefault()
                 .map(user, UserDTO.class));
@@ -63,16 +65,16 @@ public class OfferController {
 
         Offer offer = DozerBeanMapperBuilder.buildDefault()
                 .map(offerDTO, Offer.class);
-        return offerService.save(offer);
+        return assembler.toModel(offerService.save(offer));
     }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Offer updateOffer(@PathVariable String id, @Valid @RequestBody OfferDTO offerDTO) {
+    public OfferModel updateOffer(@PathVariable String id, @Valid @RequestBody OfferDTO offerDTO) {
         offerDTO.setId(id);
         Offer offer = DozerBeanMapperBuilder.buildDefault()
                 .map(offerDTO, Offer.class);
-        return offerService.update(offer);
+        return assembler.toModel(offerService.update(offer));
     }
 
     @DeleteMapping("/{id}")

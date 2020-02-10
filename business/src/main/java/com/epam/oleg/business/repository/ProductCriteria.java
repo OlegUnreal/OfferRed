@@ -1,16 +1,15 @@
 package com.epam.oleg.business.repository;
 
+import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.entities.Product;
+import com.epam.oleg.business.entities.User;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -37,6 +36,9 @@ public class ProductCriteria {
             cq.where(pricePredicate);
         }
         if (StringUtils.isNotEmpty(productOwner)) {
+            Join<Product, User> productUserJoin = product.join("productOwner", JoinType.LEFT);
+            productUserJoin.on(criteriaBuilder.equal(productUserJoin.get("id"), productOwner));
+            cq.where(productUserJoin.getOn());
         }
         TypedQuery<Product> query = entityManager.createQuery(cq);
 

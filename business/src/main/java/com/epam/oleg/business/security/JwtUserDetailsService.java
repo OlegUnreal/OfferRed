@@ -1,7 +1,6 @@
 package com.epam.oleg.business.security;
 
 import com.epam.oleg.business.entities.User;
-import com.epam.oleg.business.entities.UserRole;
 import com.epam.oleg.business.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,15 +22,9 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.getByEmail(username);
-        List<GrantedAuthority> authorities = getUserAuthority(user.getUserRole());
-        return buildUserForAuthentication(user, authorities);
-    }
+        List<GrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority(user.getUserRole().toString()));
 
-    private List<GrantedAuthority> getUserAuthority(UserRole userRole) {
-        return Collections.singletonList(new SimpleGrantedAuthority(userRole.toString()));
-    }
-
-    private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 true, true, true, true, authorities);
     }

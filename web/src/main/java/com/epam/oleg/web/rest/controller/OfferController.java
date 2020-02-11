@@ -1,6 +1,7 @@
 package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.repository.OfferCriteria;
 import com.epam.oleg.business.service.OfferService;
@@ -10,8 +11,6 @@ import com.epam.oleg.web.hateos.assembler.OfferModelAssembler;
 import com.epam.oleg.web.hateos.model.OfferModel;
 import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
 import com.epam.oleg.web.rest.dto.OfferDTO;
-import com.epam.oleg.web.rest.dto.ProductDTO;
-import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -55,16 +54,14 @@ public class OfferController {
     @ResponseStatus(HttpStatus.OK)
     public OfferModel createOffer(@Valid @RequestBody OfferDTO offerDTO) {
         User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
-        offerDTO.setOfferOwner(DozerBeanMapperBuilder.buildDefault()
-                .map(user, UserDTO.class));
 
-        List<ProductDTO> products = new ArrayList<>();
-        offerDTO.getProductsIds().forEach(id -> products.add(DozerBeanMapperBuilder.buildDefault()
-                .map(productService.getById(id), ProductDTO.class)));
-        offerDTO.setProducts(products);
+        List<Product> products = new ArrayList<>();
+        offerDTO.getProductsIds().forEach(id -> products.add(productService.getById(id)));
 
         Offer offer = DozerBeanMapperBuilder.buildDefault()
                 .map(offerDTO, Offer.class);
+        offer.setOfferOwner(user);
+        offer.setProducts(products);
         return assembler.toModel(offerService.save(offer));
     }
 

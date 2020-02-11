@@ -51,10 +51,9 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public ProductModel createProduct(@Valid @RequestBody ProductDTO productDTO) {
         User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
-        productDTO.setProductOwner(DozerBeanMapperBuilder.buildDefault()
-                .map(user, UserDTO.class));
         Product product = DozerBeanMapperBuilder.buildDefault()
                 .map(productDTO, Product.class);
+        product.setProductOwner(user);
         return assembler.toModel(productService.create(product));
     }
 

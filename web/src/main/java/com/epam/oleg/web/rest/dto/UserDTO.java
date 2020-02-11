@@ -2,9 +2,11 @@ package com.epam.oleg.web.rest.dto;
 
 import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.UserRole;
+import com.epam.oleg.web.validation.user.UniqueEmail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -22,6 +24,7 @@ public class UserDTO {
     @NotNull(message = "Email cannot be null")
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Invalid email format")
+    @UniqueEmail
     private String email;
 
     @NotNull(message = "Password cannot be null")

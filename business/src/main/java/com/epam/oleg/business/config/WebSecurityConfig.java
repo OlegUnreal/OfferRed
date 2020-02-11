@@ -52,9 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authenticate", "/users")
                 .permitAll()
                 .anyRequest()
-                .authenticated().and()
-                // make sure we use stateless session; session won't be used to
-                // store user's state.
+                .authenticated()
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()

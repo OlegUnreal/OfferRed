@@ -9,7 +9,6 @@ import com.epam.oleg.web.hateos.assembler.ProductModelAssembler;
 import com.epam.oleg.web.hateos.model.ProductModel;
 import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
 import com.epam.oleg.web.rest.dto.ProductDTO;
-import com.epam.oleg.web.rest.dto.UserDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -59,6 +58,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasPermission(#id, 'PRODUCT','UPDATE')")
     public ProductModel updateProduct(@PathVariable String id, @Valid @RequestBody ProductDTO productDTO) {
         productDTO.setId(id);
         Product product = DozerBeanMapperBuilder.buildDefault()
@@ -67,7 +67,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasPermission(#id, 'PRODUCT','DELETE')")
     @ResponseStatus(code = HttpStatus.OK, reason = "Product successfully deleted")
     public void delete(@PathVariable String id) {
         productService.delete(id);

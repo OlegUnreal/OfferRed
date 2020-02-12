@@ -67,6 +67,7 @@ public class OfferController {
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasPermission(#id, 'OFFER','UPDATE')")
     public OfferModel updateOffer(@PathVariable String id, @Valid @RequestBody OfferDTO offerDTO) {
         offerDTO.setId(id);
         Offer offer = DozerBeanMapperBuilder.buildDefault()
@@ -75,7 +76,7 @@ public class OfferController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasPermission(#id, 'OFFER','DELETE')")
     @ResponseStatus(code = HttpStatus.OK, reason = "Offer deleted successfully")
     public void deleteOffer(@PathVariable String id) {
         offerService.delete(id);

@@ -60,6 +60,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ADMIN') or hasPermission(#id, 'USER','UPDATE')")
     public UserModel updateUser(@RequestBody @Valid UserDTO userDTO) {
         User user = DozerBeanMapperBuilder.buildDefault()
                 .map(userDTO, User.class);
@@ -67,7 +68,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasPermission(#id, 'USER','DELETE')")
     @ResponseStatus(code = HttpStatus.OK, reason = "Offer deleted successfully")
     public void deleteUser(@PathVariable String id) {
         userService.delete(id);

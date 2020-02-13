@@ -19,26 +19,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
 public class UserController {
 
-    private UserServiceImpl userService;
-    private UserCriteria userCriteria;
+    private final UserServiceImpl userService;
+    private final UserCriteria userCriteria;
     private final UserModelAssembler assembler;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CollectionModel<UserModel> getAll(@PageableDefault Pageable pageable,
-                                        @RequestParam(required = false) String email,
-                                        @RequestParam(required = false) String name,
-                                        @RequestParam(required = false) UserRole userRole,
-                                        @RequestParam(required = false) Gender gender,
-                                        @RequestParam(required = false) String city,
-                                        @RequestParam(required = false) Integer age) {
+                                             @RequestParam(required = false) String email,
+                                             @RequestParam(required = false) String name,
+                                             @RequestParam(required = false) UserRole userRole,
+                                             @RequestParam(required = false) Gender gender,
+                                             @RequestParam(required = false) String city,
+                                             @RequestParam(required = false) Integer age) {
         return assembler.toCollectionModel(userCriteria.findAll(email, name, userRole, gender, city, age));
     }
 
@@ -61,7 +60,7 @@ public class UserController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ADMIN') or hasPermission(#id, 'USER','UPDATE')")
-    public UserModel updateUser(@RequestBody @Valid UserDTO userDTO) {
+    public UserModel updateUser(@PathVariable String id, @RequestBody @Valid UserDTO userDTO) {
         User user = DozerBeanMapperBuilder.buildDefault()
                 .map(userDTO, User.class);
         return assembler.toModel(userService.update(user));

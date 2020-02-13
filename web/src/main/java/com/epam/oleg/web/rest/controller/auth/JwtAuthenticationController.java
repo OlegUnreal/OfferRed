@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class JwtAuthenticationController {
 
-    private AuthenticationManager authenticationManager;
-    private JwtUtil jwtUtil;
-    private JwtUserDetailsService userDetailsService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final JwtUserDetailsService userDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {

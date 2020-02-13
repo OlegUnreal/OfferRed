@@ -4,16 +4,16 @@ import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.OfferRepository;
 import com.epam.oleg.business.service.OfferService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class OfferServiceImpl implements OfferService {
 
-    @Autowired
-    private OfferRepository offerRepository;
+    private final OfferRepository offerRepository;
 
     @Override
     public Page<Offer> getAll(Pageable pageable) {

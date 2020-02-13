@@ -25,9 +25,9 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class ProductController {
 
-    private ProductService productService;
-    private UserService userService;
-    private ProductCriteria productCriteria;
+    private final ProductService productService;
+    private final UserService userService;
+    private final ProductCriteria productCriteria;
     private final ProductModelAssembler assembler;
 
     @GetMapping

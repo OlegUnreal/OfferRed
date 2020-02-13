@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.Optional;
 
+import static com.epam.oleg.business.common.EntityTypes.*;
+
 @Component
 @AllArgsConstructor
 public class UserPermissionEvaluator implements PermissionEvaluator {
@@ -29,19 +31,19 @@ public class UserPermissionEvaluator implements PermissionEvaluator {
 
     @Override
     public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission) {
-        if (targetType.equals("PRODUCT")) {
+        if (targetType.equals(PRODUCT)) {
             Optional<Product> product = productRepository.findById(targetId.toString());
             if (product.isPresent()) {
                 return product.get().getProductOwner().getEmail().equals(authentication.getName());
             }
         }
-        if (targetType.equals("OFFER")) {
+        if (targetType.equals(OFFER)) {
             Optional<Offer> offer = offerRepository.findById(targetId.toString());
             if (offer.isPresent()) {
                 return offer.get().getOfferOwner().getEmail().equals(authentication.getName());
             }
         }
-        if (targetType.equals("USER")) {
+        if (targetType.equals(USER)) {
             Optional<User> user = userRepository.findById(targetId.toString());
             if (user.isPresent()) {
                 return user.get().getEmail().equals(authentication.getName());

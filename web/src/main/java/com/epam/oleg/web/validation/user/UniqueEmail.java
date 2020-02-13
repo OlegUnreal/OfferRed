@@ -21,11 +21,11 @@ public @interface UniqueEmail {
 
     Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 
     @AllArgsConstructor
     class UniqueNameConstraint implements ConstraintValidator<UniqueEmail, String> {
-        UserRepository userRepository;
+        final UserRepository userRepository;
 
         @Override
         public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {

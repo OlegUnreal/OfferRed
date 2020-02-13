@@ -29,11 +29,11 @@ import java.util.List;
 @AllArgsConstructor
 public class OfferController {
 
-    private OfferService offerService;
-    private ProductService productService;
-    private UserService userService;
-    private OfferCriteria offerCriteria;
-    private OfferModelAssembler assembler;
+    private final OfferService offerService;
+    private final ProductService productService;
+    private final UserService userService;
+    private final OfferCriteria offerCriteria;
+    private final OfferModelAssembler assembler;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

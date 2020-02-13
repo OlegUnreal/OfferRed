@@ -15,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public Page<Product> getAll(Pageable pageable) {

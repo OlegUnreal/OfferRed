@@ -21,4 +21,5 @@ public class Offer {
     private User offerOwner;
     @OneToMany
     private List<Product> products;
+    private int price;
 }

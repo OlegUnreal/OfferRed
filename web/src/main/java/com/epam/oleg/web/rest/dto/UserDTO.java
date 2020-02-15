@@ -6,7 +6,6 @@ import com.epam.oleg.web.validation.user.UniqueEmail;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -42,4 +41,7 @@ public class UserDTO {
     @NotNull(message = "City cannot be null")
     @NotEmpty(message = "City cannot be empty")
     private String city;
+
+    @Min(value = 0, message = "Balance cannot be negative")
+    private int balance;
 }

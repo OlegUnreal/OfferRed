@@ -28,6 +28,7 @@ public class OfferModelAssembler extends RepresentationModelAssemblerSupport<Off
         offerModel.setOfferOwner(entity.getOfferOwner());
         offerModel.setOfferStatus(entity.getOfferStatus());
         offerModel.setProducts(entity.getProducts());
+        offerModel.setPrice(entity.getPrice());
         return offerModel;
     }
 

@@ -18,4 +18,5 @@ public class OfferModel extends RepresentationModel<OfferModel> {
     private OfferStatus offerStatus;
     private User offerOwner;
     private List<Product> products;
+    private int price;
 }

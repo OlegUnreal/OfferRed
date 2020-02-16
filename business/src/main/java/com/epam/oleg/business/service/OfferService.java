@@ -1,6 +1,7 @@
 package com.epam.oleg.business.service;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ public interface OfferService {
     Offer save(Offer offer);
 
     Offer update(Offer offer);
+
+    void buyOffer(String id, User user);
 
     void delete(String id);
 }

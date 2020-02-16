@@ -1,23 +1,29 @@
 package com.epam.oleg.business.service.impl;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.OfferStatus;
 import com.epam.oleg.business.entities.Product;
+import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.OfferRepository;
 import com.epam.oleg.business.service.OfferService;
+import com.epam.oleg.business.service.UserService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository offerRepository;
+    private final UserService userService;
 
     @Override
     public Page<Offer> getAll(Pageable pageable) {
@@ -26,7 +32,7 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public Offer getById(String id) {
-        return offerRepository.findById(id).orElseThrow((() -> new NotFoundException("User with id " + id
+        return offerRepository.findById(id).orElseThrow((() -> new NotFoundException("Offer with id " + id
                 + " not found")));
     }
 
@@ -49,6 +55,22 @@ public class OfferServiceImpl implements OfferService {
             return offerRepository.save(offer);
         }
         throw new NotFoundException("Can't update offer with id " + offer.getId() + ". Offer not found");
+    }
+
+    @Override
+    @Transactional(rollbackOn = Exception.class)
+    public void buyOffer(String id, User user) {
+        Offer offer = getById(id);
+        if (offer.getOfferOwner().getId().equals(user.getId())) {
+            throw new UnsupportedOperationException("Cannot buy your own offer");
+        }
+        if (offer.getPrice() > user.getBalance()) {
+            throw new UnsupportedOperationException("Not enough money on the balance");
+        }
+        user.setBalance(user.getBalance() - offer.getPrice());
+        offer.setOfferStatus(OfferStatus.COMPLETED);
+        userService.update(user);
+        update(offer);
     }
 
     @Override

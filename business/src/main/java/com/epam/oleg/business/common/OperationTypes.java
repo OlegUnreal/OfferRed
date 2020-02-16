@@ -4,7 +4,8 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class OperationTypes {
-    final String DELETE = "DELETE";
-    final String UPDATE = "UPDATE";
-    final String GET = "GET";
+    public final String DELETE = "DELETE";
+    public final String UPDATE = "UPDATE";
+    public final String GET = "GET";
+    public final String BUY = "BUY";
 }

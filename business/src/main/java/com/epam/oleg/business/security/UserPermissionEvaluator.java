@@ -1,5 +1,6 @@
 package com.epam.oleg.business.security;
 
+import com.epam.oleg.business.common.OperationTypes;
 import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
@@ -38,9 +39,12 @@ public class UserPermissionEvaluator implements PermissionEvaluator {
             }
         }
         if (targetType.equals(OFFER)) {
-            Optional<Offer> offer = offerRepository.findById(targetId.toString());
-            if (offer.isPresent()) {
-                return offer.get().getOfferOwner().getEmail().equals(authentication.getName());
+            if (permission.toString().equals(OperationTypes.UPDATE)
+                    || permission.toString().equals(OperationTypes.DELETE)) {
+                Optional<Offer> offer = offerRepository.findById(targetId.toString());
+                if (offer.isPresent()) {
+                    return offer.get().getOfferOwner().getEmail().equals(authentication.getName());
+                }
             }
         }
         if (targetType.equals(USER)) {
@@ -49,6 +53,6 @@ public class UserPermissionEvaluator implements PermissionEvaluator {
                 return user.get().getEmail().equals(authentication.getName());
             }
         }
-        return false;
+        return true;
     }
 }

@@ -24,6 +24,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.oleg.web.rest.controller.auth.utils.AuthUtils.*;
+
 @RestController
 @RequestMapping("/offers")
 @AllArgsConstructor
@@ -51,9 +53,9 @@ public class OfferController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public OfferModel createOffer(@Valid @RequestBody OfferDTO offerDTO) {
-        User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
+        User user = userService.getByEmail(getCurrentAuth().getName());
 
         List<Product> products = new ArrayList<>();
         offerDTO.getProductsIds().forEach(id -> products.add(productService.getById(id)));
@@ -73,6 +75,14 @@ public class OfferController {
         Offer offer = DozerBeanMapperBuilder.buildDefault()
                 .map(offerDTO, Offer.class);
         return assembler.toModel(offerService.update(offer));
+    }
+
+    @PostMapping("/{id}/buy")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasPermission(#id, 'OFFER', 'BUY')")
+    public void buyOffer(@PathVariable String id) {
+        User user = userService.getByEmail(getCurrentAuth().getName());
+        offerService.buyOffer(id, user);
     }
 
     @DeleteMapping("/{id}")

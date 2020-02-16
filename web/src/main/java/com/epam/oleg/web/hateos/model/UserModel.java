@@ -21,4 +21,5 @@ public class UserModel extends RepresentationModel<UserModel> {
     private Gender gender;
     private String city;
     private int age;
+    private int balance;
 }

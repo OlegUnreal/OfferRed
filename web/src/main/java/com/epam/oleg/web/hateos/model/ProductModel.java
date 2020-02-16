@@ -1,7 +1,6 @@
 package com.epam.oleg.web.hateos.model;
 
 import com.epam.oleg.business.entities.ProductCategory;
-import com.epam.oleg.business.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +14,5 @@ public class ProductModel extends RepresentationModel<ProductModel> {
     private String name;
     private ProductCategory category;
     private int price;
-    private User productOwner;
+    private UserModel productOwner;
 }

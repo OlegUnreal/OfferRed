@@ -4,6 +4,7 @@ import com.epam.oleg.business.entities.OfferStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -26,4 +27,7 @@ public class OfferDTO {
     @NotEmpty(message = "Product ids list cannot be empty")
     private List<@NotEmpty(message = "Product id cannot be empty")
     @NotNull(message = "Product id cannot be null") String> productsIds;
+
+    @Min(value = 0, message = "Price cannot be less than 0")
+    private int price;
 }

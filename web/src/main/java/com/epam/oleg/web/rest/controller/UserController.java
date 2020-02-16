@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public UserModel createUser(@RequestBody @Valid UserDTO userDTO) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));

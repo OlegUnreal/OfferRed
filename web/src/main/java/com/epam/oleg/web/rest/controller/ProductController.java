@@ -47,7 +47,7 @@ public class ProductController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductModel createProduct(@Valid @RequestBody ProductDTO productDTO) {
         User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
         Product product = DozerBeanMapperBuilder.buildDefault()

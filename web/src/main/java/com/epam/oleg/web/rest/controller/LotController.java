@@ -42,7 +42,7 @@ public class LotController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public LotModel createLot(@Valid @RequestBody LotDTO lotDTO) {
         User user = userService.getByEmail(AuthUtils.getCurrentAuth().getName());
         Lot lot = DozerBeanMapperBuilder.buildDefault().map(lotDTO, Lot.class);

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.2.RELEASE</version>
+        <version>${spring-boot.version}</version>
         <relativePath/>
     </parent>
     <groupId>com.epam.oleg</groupId>
@@ -15,6 +15,9 @@
     <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
 
+    <properties>
+        <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
+    </properties>
     <modules>
         <module>business</module>
         <module>web</module>

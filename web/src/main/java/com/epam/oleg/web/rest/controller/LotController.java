@@ -11,8 +11,6 @@ import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
 import com.epam.oleg.web.rest.dto.LotDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,8 +29,10 @@ public class LotController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public CollectionModel<LotModel> getAll(@PageableDefault Pageable pageable) {
-        return assembler.toCollectionModel(lotService.getAll(pageable));
+    public CollectionModel<LotModel> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice,
+                                             String status, String offerId, String ownerId) {
+        return assembler.toCollectionModel(
+                lotService.findAll(startedPrice, currentPrice, finalPrice, status, offerId, ownerId));
     }
 
     @GetMapping("/{id}")

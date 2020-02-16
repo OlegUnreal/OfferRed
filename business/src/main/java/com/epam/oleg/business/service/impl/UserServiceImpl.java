@@ -1,7 +1,10 @@
 package com.epam.oleg.business.service.impl;
 
+import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.User;
+import com.epam.oleg.business.entities.UserRole;
 import com.epam.oleg.business.exception.NotFoundException;
+import com.epam.oleg.business.repository.UserCriteria;
 import com.epam.oleg.business.repository.UserRepository;
 import com.epam.oleg.business.service.UserService;
 import lombok.AllArgsConstructor;
@@ -9,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,10 +20,11 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserCriteria userCriteria;
 
     @Override
-    public Page<User> getAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public List<User> findAll(String email, String name, UserRole userRole, Gender gender, String city, Integer age) {
+        return userCriteria.findAll(email, name, userRole, gender, city, age);
     }
 
     @Override

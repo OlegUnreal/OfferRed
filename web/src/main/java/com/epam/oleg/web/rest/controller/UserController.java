@@ -3,7 +3,6 @@ package com.epam.oleg.web.rest.controller;
 import com.epam.oleg.business.entities.Gender;
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.entities.UserRole;
-import com.epam.oleg.business.repository.UserCriteria;
 import com.epam.oleg.business.service.impl.UserServiceImpl;
 import com.epam.oleg.web.hateos.assembler.UserModelAssembler;
 import com.epam.oleg.web.hateos.model.UserModel;
@@ -26,7 +25,6 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserServiceImpl userService;
-    private final UserCriteria userCriteria;
     private final UserModelAssembler assembler;
 
     @GetMapping
@@ -38,7 +36,7 @@ public class UserController {
                                              @RequestParam(required = false) Gender gender,
                                              @RequestParam(required = false) String city,
                                              @RequestParam(required = false) Integer age) {
-        return assembler.toCollectionModel(userCriteria.findAll(email, name, userRole, gender, city, age));
+        return assembler.toCollectionModel(userService.findAll(email, name, userRole, gender, city, age));
     }
 
     @GetMapping("/{id}")

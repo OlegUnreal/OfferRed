@@ -3,13 +3,11 @@ package com.epam.oleg.web.rest.controller;
 import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
-import com.epam.oleg.business.repository.OfferCriteria;
 import com.epam.oleg.business.service.OfferService;
 import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.business.service.UserService;
 import com.epam.oleg.web.hateos.assembler.OfferModelAssembler;
 import com.epam.oleg.web.hateos.model.OfferModel;
-import com.epam.oleg.web.rest.controller.auth.utils.AuthUtils;
 import com.epam.oleg.web.rest.dto.OfferDTO;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import lombok.AllArgsConstructor;
@@ -24,7 +22,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.oleg.web.rest.controller.auth.utils.AuthUtils.*;
+import static com.epam.oleg.web.rest.controller.auth.utils.AuthUtils.getCurrentAuth;
 
 @RestController
 @RequestMapping("/offers")
@@ -34,7 +32,6 @@ public class OfferController {
     private final OfferService offerService;
     private final ProductService productService;
     private final UserService userService;
-    private final OfferCriteria offerCriteria;
     private final OfferModelAssembler assembler;
 
     @GetMapping
@@ -43,7 +40,7 @@ public class OfferController {
                                               @RequestParam(required = false) String offerStatus,
                                               @RequestParam(required = false) String ownerName,
                                               @RequestParam(required = false) String productName) {
-        return assembler.toCollectionModel(offerCriteria.findAll(offerStatus, ownerName, productName));
+        return assembler.toCollectionModel(offerService.findAll(offerStatus, ownerName, productName));
     }
 
     @GetMapping("/{id}")

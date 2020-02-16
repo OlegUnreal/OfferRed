@@ -1,13 +1,13 @@
 package com.epam.oleg.business.service;
 
 import com.epam.oleg.business.entities.Lot;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 
 public interface LotService {
-    List<Lot> getAll(Pageable pageable);
+    List<Lot> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice, String status, String offerId,
+                      String ownerId);
 
     Lot getById(String id);
 

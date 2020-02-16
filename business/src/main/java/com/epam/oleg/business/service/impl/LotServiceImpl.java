@@ -2,11 +2,10 @@ package com.epam.oleg.business.service.impl;
 
 import com.epam.oleg.business.entities.Lot;
 import com.epam.oleg.business.exception.NotFoundException;
+import com.epam.oleg.business.repository.LotCriteria;
 import com.epam.oleg.business.repository.LotRepository;
 import com.epam.oleg.business.service.LotService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +15,12 @@ import java.util.List;
 public class LotServiceImpl implements LotService {
 
     private final LotRepository repository;
+    private final LotCriteria lotCriteria;
 
     @Override
-    public List<Lot> getAll(Pageable pageable) {
-        return repository.findAll(pageable).getContent();
+    public List<Lot> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice, String status,
+                             String offerId, String ownerId) {
+        return lotCriteria.findAll(startedPrice, currentPrice, finalPrice, status, offerId, ownerId);
     }
 
     @Override

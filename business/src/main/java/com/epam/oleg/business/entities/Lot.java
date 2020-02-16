@@ -21,5 +21,8 @@ public class Lot {
     private LotStatus lotStatus;
 
     @OneToOne
+    private User lotOwner;
+
+    @OneToOne
     private Offer offer;
 }

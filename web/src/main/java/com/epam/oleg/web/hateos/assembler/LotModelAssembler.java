@@ -5,10 +5,12 @@ import com.epam.oleg.web.hateos.model.LotModel;
 import com.epam.oleg.web.rest.controller.LotController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@Component
 public class LotModelAssembler extends RepresentationModelAssemblerSupport<Lot, LotModel> {
 
     public LotModelAssembler() {

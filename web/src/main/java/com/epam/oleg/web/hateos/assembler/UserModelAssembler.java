@@ -22,7 +22,7 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
 
         UserModel userModel = instantiateModel(entity);
         userModel.add(linkTo(methodOn(UserController.class)
-                .getUser(userModel.getId()))
+                .getUser(entity.getId()))
                 .withSelfRel());
         userModel.setId(entity.getId());
         userModel.setAge(entity.getAge());

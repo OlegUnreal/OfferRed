@@ -42,7 +42,8 @@ public class ProductModelAssembler extends RepresentationModelAssemblerSupport<P
         CollectionModel<ProductModel> productModels = super.toCollectionModel(entities);
         productModels.add(linkTo(methodOn(ProductController.class)
                 .getAll(null, null, null, null, null))
-                .withSelfRel());
+                .withSelfRel()
+                .expand());
         return productModels;
     }
 }

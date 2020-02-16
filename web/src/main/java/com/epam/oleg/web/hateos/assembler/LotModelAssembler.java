@@ -38,7 +38,8 @@ public class LotModelAssembler extends RepresentationModelAssemblerSupport<Lot, 
         CollectionModel<LotModel> lotModels = super.toCollectionModel(entities);
         lotModels.add(linkTo(methodOn(LotController.class)
                 .getAll(null))
-                .withSelfRel());
+                .withSelfRel()
+                .expand());
         return lotModels;
     }
 }

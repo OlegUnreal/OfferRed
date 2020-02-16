@@ -5,13 +5,12 @@ import com.epam.oleg.business.entities.OfferStatus;
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.exception.NotFoundException;
+import com.epam.oleg.business.repository.OfferCriteria;
 import com.epam.oleg.business.repository.OfferRepository;
 import com.epam.oleg.business.service.OfferService;
 import com.epam.oleg.business.service.UserService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,10 +23,11 @@ public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository offerRepository;
     private final UserService userService;
+    private final OfferCriteria offerCriteria;
 
     @Override
-    public Page<Offer> getAll(Pageable pageable) {
-        return offerRepository.findAll(pageable);
+    public List<Offer> findAll(String offerStatus, String offerOwner, String productId) {
+        return offerCriteria.findAll(offerStatus, offerOwner, productId);
     }
 
     @Override

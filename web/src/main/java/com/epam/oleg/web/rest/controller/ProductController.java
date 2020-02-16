@@ -27,7 +27,6 @@ public class ProductController {
 
     private final ProductService productService;
     private final UserService userService;
-    private final ProductCriteria productCriteria;
     private final ProductModelAssembler assembler;
 
     @GetMapping
@@ -37,7 +36,7 @@ public class ProductController {
                                                 @RequestParam(required = false) String category,
                                                 @RequestParam(required = false) Integer price,
                                                 @RequestParam(required = false) String productOwner) {
-        return assembler.toCollectionModel(productCriteria.findAll(name, category, price, productOwner));
+        return assembler.toCollectionModel(productService.findAll(name, category, price, productOwner));
     }
 
     @GetMapping("/{id}")

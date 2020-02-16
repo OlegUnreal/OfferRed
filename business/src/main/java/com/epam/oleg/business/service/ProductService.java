@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ProductService {
-    Page<Product> getAll(Pageable pageable);
+    public List<Product> findAll(String name, String category, Integer price, String productOwner);
 
     Product getById(String id);
 

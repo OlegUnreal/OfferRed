@@ -46,7 +46,8 @@ public class OfferModelAssembler extends RepresentationModelAssemblerSupport<Off
     public CollectionModel<OfferModel> toCollectionModel(Iterable<? extends Offer> entities) {
         CollectionModel<OfferModel> offerModels = super.toCollectionModel(entities);
         offerModels.add(linkTo(methodOn(OfferController.class).getAll(null, null, null, null))
-                .withSelfRel());
+                .withSelfRel()
+                .expand());
         return offerModels;
     }
 }

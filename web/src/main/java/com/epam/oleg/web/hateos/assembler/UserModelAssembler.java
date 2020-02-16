@@ -40,7 +40,8 @@ public class UserModelAssembler extends RepresentationModelAssemblerSupport<User
         CollectionModel<UserModel> userModels = super.toCollectionModel(entities);
         userModels.add(linkTo(methodOn(UserController.class)
                 .getAll(null, null, null, null, null, null, null))
-                .withSelfRel());
+                .withSelfRel()
+                .expand());
         return userModels;
     }
 }

@@ -2,25 +2,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>${spring-boot.version}</version>
-        <relativePath/>
-    </parent>
+
     <groupId>com.epam.oleg</groupId>
     <artifactId>training_project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>training_project</name>
     <packaging>pom</packaging>
-    <description>Demo project for Spring Boot</description>
+    <description>OfferRed</description>
 
     <properties>
         <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
+        <java.version>1.8</java.version>
     </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <modules>
         <module>business</module>
         <module>web</module>
+        <module>soap</module>
     </modules>
 
     <dependencies>

@@ -37,7 +37,7 @@ public class LotModelAssembler extends RepresentationModelAssemblerSupport<Lot, 
     public CollectionModel<LotModel> toCollectionModel(Iterable<? extends Lot> entities) {
         CollectionModel<LotModel> lotModels = super.toCollectionModel(entities);
         lotModels.add(linkTo(methodOn(LotController.class)
-                .getAll(null))
+                .findAll(null, null, null, null, null, null))
                 .withSelfRel()
                 .expand());
         return lotModels;

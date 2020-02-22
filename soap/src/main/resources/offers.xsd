@@ -23,7 +23,7 @@
             <xs:element name="id" type="xs:string"/>
             <xs:element name="offerStatus" type="tns:offerStatus"/>
             <xs:element name="offerOwner" type="tns:user"/>
-            <xs:element name="products" type="tns:products"/>
+            <xs:element name="products" type="tns:product" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="price" type="xs:integer"/>
             <xs:element name="city" type="xs:string"/>
             <xs:element name="age" type="xs:integer"/>
@@ -41,7 +41,4 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="products">
-            <xs:list itemType="tns:product"/>
-    </xs:simpleType>
 </xs:schema>

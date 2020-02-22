@@ -1,0 +1,47 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+    <xs:include schemaLocation="users.xsd"/>
+    <xs:include schemaLocation="products.xsd"/>
+    <xs:element name="getOfferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="offer" type="tns:offer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getOfferResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="offer" type="tns:offer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="offer">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="offerStatus" type="tns:offerStatus"/>
+            <xs:element name="offerOwner" type="tns:user"/>
+            <xs:element name="products" type="tns:products"/>
+            <xs:element name="price" type="xs:integer"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="age" type="xs:integer"/>
+            <xs:element name="balance" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="offerStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NEW"/>
+            <xs:enumeration value="BOOKED"/>
+            <xs:enumeration value="WAITING_PAYMENT"/>
+            <xs:enumeration value="IN_PROGRESS"/>
+            <xs:enumeration value="COMPLETED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="products">
+            <xs:list itemType="tns:product"/>
+    </xs:simpleType>
+</xs:schema>

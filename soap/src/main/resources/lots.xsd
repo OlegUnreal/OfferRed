@@ -1,0 +1,39 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+    <xs:include schemaLocation="users.xsd"/>
+    <xs:include schemaLocation="offers.xsd"/>
+    <xs:element name="getLotRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lot" type="tns:lot"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getLotResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lot" type="tns:lot"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="lot">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="startedPrice" type="xs:integer"/>
+            <xs:element name="currentPrice" type="xs:integer"/>
+            <xs:element name="finalPrice" type="xs:integer"/>
+            <xs:element name="lotStatus" type="tns:lotStatus"/>
+            <xs:element name="lotOwner" type="tns:user"/>
+            <xs:element name="offer" type="tns:offer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="lotStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OPEN"/>
+            <xs:enumeration value="SOLD"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

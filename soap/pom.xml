@@ -67,6 +67,9 @@
                 <configuration>
                     <sources>
                         <source>${project.basedir}/src/main/resources/users.xsd</source>
+                        <source>${project.basedir}/src/main/resources/lots.xsd</source>
+                        <source>${project.basedir}/src/main/resources/products.xsd</source>
+                        <source>${project.basedir}/src/main/resources/offers.xsd</source>
                     </sources>
                 </configuration>
             </plugin>

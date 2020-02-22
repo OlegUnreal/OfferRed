@@ -1,0 +1,38 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+    <xs:include schemaLocation="users.xsd"/>
+    <xs:element name="getProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="product" type="tns:product"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProductResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="product" type="tns:product"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="product">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="category" type="tns:productCategory"/>
+            <xs:element name="price" type="xs:integer"/>
+            <xs:element name="productOwner" type="tns:user"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="productCategory">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COMPUTER"/>
+            <xs:enumeration value="PHONE"/>
+            <xs:enumeration value="HEADPHONES"/>
+            <xs:enumeration value="EQUIPMENT"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

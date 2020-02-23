@@ -25,6 +25,7 @@
     <modules>
         <module>business</module>
         <module>web</module>
+        <module>soap</module>
     </modules>
 
     <dependencies>

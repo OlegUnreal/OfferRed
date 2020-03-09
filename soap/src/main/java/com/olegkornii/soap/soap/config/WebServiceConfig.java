@@ -20,15 +20,15 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
-        return new ServletRegistrationBean(servlet, "/ws/*");
+        return new ServletRegistrationBean(servlet, "/soap/*");
     }
 
     @Bean(name = "users")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema userSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("UsersPort");
-        wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://localhost/users");
+        wsdl11Definition.setLocationUri("/soap/users");
+        wsdl11Definition.setTargetNamespace("http://localhost:8080/xml/users");
         wsdl11Definition.setSchema(userSchema);
         return wsdl11Definition;
     }

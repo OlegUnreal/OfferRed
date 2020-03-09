@@ -17,7 +17,7 @@ public class UserEndpoint {
 
     private final UserServiceImpl userService;
 
-    @PayloadRoot(namespace = "http://localhost:8080/users", localPart = "getUserRequest")
+    @PayloadRoot(namespace = "http://localhost:8080/xml/users", localPart = "getUserRequest")
     @ResponsePayload
     public GetUserResponse getCountry(@RequestPayload GetUserRequest request) {
         GetUserResponse response = new GetUserResponse();

@@ -27,7 +27,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <type>pom</type>
-                <version>2.2.4.RELEASE</version>
+                <version>2.2.5.RELEASE</version>
                 <scope>import</scope>
             </dependency>
         </dependencies>

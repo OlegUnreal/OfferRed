@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.oleg</groupId>
-    <artifactId>training_project</artifactId>
+    <artifactId>offerred</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>training_project</name>
+    <name>offerred</name>
     <packaging>pom</packaging>
     <description>OfferRed</description>
 

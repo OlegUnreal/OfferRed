@@ -2,6 +2,7 @@ package com.epam.oleg.business.repository;
 
 import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.entities.Product;
+import com.epam.oleg.business.entities.ProductCategory;
 import com.epam.oleg.business.entities.User;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +19,7 @@ public class ProductCriteria {
 
     private final EntityManager entityManager;
 
-    public List<Product> findAll(String name, String category, Integer price, String productOwner) {
+    public List<Product> findAll(String name, ProductCategory category, Integer price, String productOwner) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Product> cq = criteriaBuilder.createQuery(Product.class);
         Root<Product> product = cq.from(Product.class);
@@ -27,7 +28,7 @@ public class ProductCriteria {
             Predicate namePredicate = criteriaBuilder.equal(product.get("name"), name);
             cq.where(namePredicate);
         }
-        if (StringUtils.isNotEmpty(category)) {
+        if (category != null) {
             Predicate categoryPredicate = criteriaBuilder.equal(product.get("category"), category);
             cq.where(categoryPredicate);
         }

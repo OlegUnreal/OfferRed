@@ -1,4 +1,4 @@
-package com.epam.oleg.business.security;
+package com.epam.oleg.web.security.entry;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

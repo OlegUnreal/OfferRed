@@ -1,6 +1,7 @@
 package com.epam.oleg.business.repository;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.OfferStatus;
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
 import lombok.AllArgsConstructor;
@@ -18,12 +19,12 @@ public class OfferCriteria {
 
     private final EntityManager entityManager;
 
-    public List<Offer> findAll(String offerStatus, String offerOwner, String productId) {
+    public List<Offer> findAll(OfferStatus offerStatus, String offerOwner, String productId) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Offer> cq = criteriaBuilder.createQuery(Offer.class);
         Root<Offer> offer = cq.from(Offer.class);
 
-        if (StringUtils.isNotEmpty(offerStatus)) {
+        if (offerStatus != null) {
             Predicate offerStatusPredicate = criteriaBuilder.equal(offer.get("offerStatus"), offerStatus);
             cq.where(offerStatusPredicate);
         }

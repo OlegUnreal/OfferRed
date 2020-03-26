@@ -1,6 +1,7 @@
 package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.OfferStatus;
 import com.epam.oleg.business.entities.Product;
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.OfferService;
@@ -37,7 +38,7 @@ public class OfferController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CollectionModel<OfferModel> getAll(@PageableDefault Pageable pageable,
-                                              @RequestParam(required = false) String offerStatus,
+                                              @RequestParam(required = false) OfferStatus offerStatus,
                                               @RequestParam(required = false) String ownerName,
                                               @RequestParam(required = false) String productName) {
         return assembler.toCollectionModel(offerService.findAll(offerStatus, ownerName, productName));

@@ -5,7 +5,7 @@
     <xs:element name="getOfferRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="offer" type="tns:offer"/>
+                <xs:element name="id" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -18,16 +18,62 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getOffersRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="offerStatus" type="tns:offerStatus"/>
+                <xs:element name="ownerId" type="xs:string"/>
+                <xs:element name="productId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getOffersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="offerList" type="tns:offer" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createOfferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="offerStatus" type="tns:offerStatus"/>
+                <xs:element name="ownerId" type="xs:string"/>
+                <xs:element name="productIds" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="price" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateOfferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="offerStatus" type="tns:offerStatus"/>
+                <xs:element name="ownerId" type="xs:string"/>
+                <xs:element name="productIds" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="price" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteOfferRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="offer">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="offerStatus" type="tns:offerStatus"/>
             <xs:element name="offerOwner" type="tns:user"/>
             <xs:element name="products" type="tns:product" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="price" type="xs:integer"/>
-            <xs:element name="city" type="xs:string"/>
-            <xs:element name="age" type="xs:integer"/>
-            <xs:element name="balance" type="xs:integer"/>
+            <xs:element name="price" type="xs:int"/>
         </xs:sequence>
     </xs:complexType>
 

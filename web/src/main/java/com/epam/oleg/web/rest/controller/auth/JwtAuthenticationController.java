@@ -1,9 +1,9 @@
 package com.epam.oleg.web.rest.controller.auth;
 
-import com.epam.oleg.business.security.JwtRequest;
-import com.epam.oleg.business.security.JwtResponse;
-import com.epam.oleg.business.security.JwtUserDetailsService;
-import com.epam.oleg.business.utils.JwtUtil;
+import com.epam.oleg.web.security.entry.JwtRequest;
+import com.epam.oleg.web.security.entry.JwtResponse;
+import com.epam.oleg.web.security.JwtUserDetailsService;
+import com.epam.oleg.web.security.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.ResponseEntity;

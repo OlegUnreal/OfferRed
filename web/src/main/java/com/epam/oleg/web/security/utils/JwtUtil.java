@@ -1,4 +1,4 @@
-package com.epam.oleg.business.utils;
+package com.epam.oleg.web.security.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

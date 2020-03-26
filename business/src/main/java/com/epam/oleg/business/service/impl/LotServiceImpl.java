@@ -1,6 +1,7 @@
 package com.epam.oleg.business.service.impl;
 
 import com.epam.oleg.business.entities.Lot;
+import com.epam.oleg.business.entities.LotStatus;
 import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.LotCriteria;
 import com.epam.oleg.business.repository.LotRepository;
@@ -18,7 +19,7 @@ public class LotServiceImpl implements LotService {
     private final LotCriteria lotCriteria;
 
     @Override
-    public List<Lot> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice, String status,
+    public List<Lot> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice, LotStatus status,
                              String offerId, String ownerId) {
         return lotCriteria.findAll(startedPrice, currentPrice, finalPrice, status, offerId, ownerId);
     }

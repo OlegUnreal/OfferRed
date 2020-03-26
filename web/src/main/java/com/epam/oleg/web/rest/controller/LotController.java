@@ -1,6 +1,7 @@
 package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Lot;
+import com.epam.oleg.business.entities.LotStatus;
 import com.epam.oleg.business.entities.User;
 import com.epam.oleg.business.service.LotService;
 import com.epam.oleg.business.service.OfferService;
@@ -30,7 +31,7 @@ public class LotController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CollectionModel<LotModel> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice,
-                                             String status, String offerId, String ownerId) {
+                                             LotStatus status, String offerId, String ownerId) {
         return assembler.toCollectionModel(
                 lotService.findAll(startedPrice, currentPrice, finalPrice, status, offerId, ownerId));
     }

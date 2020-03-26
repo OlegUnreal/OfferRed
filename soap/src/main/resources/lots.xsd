@@ -21,9 +21,9 @@
     <xs:element name="getLotsRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="startedPrice" type="xs:integer"/>
-                <xs:element name="currentPrice" type="xs:integer"/>
-                <xs:element name="finalPrice" type="xs:integer"/>
+                <xs:element name="startedPrice" type="xs:int"/>
+                <xs:element name="currentPrice" type="xs:int"/>
+                <xs:element name="finalPrice" type="xs:int"/>
                 <xs:element name="lotStatus" type="tns:lotStatus"/>
                 <xs:element name="ownerId" type="xs:string"/>
                 <xs:element name="offerId" type="xs:string"/>
@@ -42,9 +42,10 @@
     <xs:element name="updateLotRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="startedPrice" type="xs:integer"/>
-                <xs:element name="currentPrice" type="xs:integer"/>
-                <xs:element name="finalPrice" type="xs:integer"/>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="startedPrice" type="xs:int"/>
+                <xs:element name="currentPrice" type="xs:int"/>
+                <xs:element name="finalPrice" type="xs:int"/>
                 <xs:element name="lotStatus" type="tns:lotStatus"/>
                 <xs:element name="ownerId" type="xs:string"/>
                 <xs:element name="offerId" type="xs:string"/>
@@ -63,9 +64,9 @@
     <xs:complexType name="lot">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
-            <xs:element name="startedPrice" type="xs:integer"/>
-            <xs:element name="currentPrice" type="xs:integer"/>
-            <xs:element name="finalPrice" type="xs:integer"/>
+            <xs:element name="startedPrice" type="xs:int"/>
+            <xs:element name="currentPrice" type="xs:int"/>
+            <xs:element name="finalPrice" type="xs:int"/>
             <xs:element name="lotStatus" type="tns:lotStatus"/>
             <xs:element name="lotOwner" type="tns:user"/>
             <xs:element name="offer" type="tns:offer"/>

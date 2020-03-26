@@ -17,7 +17,7 @@
                 <xs:element name="userRole" type="tns:userRole"/>
                 <xs:element name="gender" type="tns:gender"/>
                 <xs:element name="city" type="xs:string"/>
-                <xs:element name="age" type="xs:integer"/>
+                <xs:element name="age" type="xs:int"/>
                 <xs:element name="balance" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
@@ -40,7 +40,7 @@
                 <xs:element name="userRole" type="tns:userRole"/>
                 <xs:element name="gender" type="tns:gender"/>
                 <xs:element name="city" type="xs:string"/>
-                <xs:element name="age" type="xs:integer"/>
+                <xs:element name="age" type="xs:int"/>
                 <xs:element name="balance" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
@@ -54,7 +54,7 @@
                 <xs:element name="userRole" type="tns:userRole"/>
                 <xs:element name="gender" type="tns:gender"/>
                 <xs:element name="city" type="xs:string"/>
-                <xs:element name="age" type="xs:integer"/>
+                <xs:element name="age" type="xs:int"/>
                 <xs:element name="balance" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
@@ -70,7 +70,7 @@
                 <xs:element name="userRole" type="tns:userRole"/>
                 <xs:element name="gender" type="tns:gender"/>
                 <xs:element name="city" type="xs:string"/>
-                <xs:element name="age" type="xs:integer"/>
+                <xs:element name="age" type="xs:int"/>
                 <xs:element name="balance" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
@@ -100,7 +100,7 @@
                 <xs:element name="userRole" type="tns:userRole"/>
                 <xs:element name="gender" type="tns:gender"/>
                 <xs:element name="city" type="xs:string"/>
-                <xs:element name="age" type="xs:integer"/>
+                <xs:element name="age" type="xs:int"/>
                 <xs:element name="balance" type="xs:int"/>
             </xs:sequence>
         </xs:complexType>
@@ -123,8 +123,8 @@
             <xs:element name="userRole" type="tns:userRole"/>
             <xs:element name="gender" type="tns:gender"/>
             <xs:element name="city" type="xs:string"/>
-            <xs:element name="age" type="xs:integer"/>
-            <xs:element name="balance" type="xs:integer"/>
+            <xs:element name="age" type="xs:int"/>
+            <xs:element name="balance" type="xs:int"/>
         </xs:sequence>
     </xs:complexType>
 

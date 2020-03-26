@@ -35,7 +35,7 @@ public class UserEndpoint {
         response.getUserList().addAll(userService.findAll(req.getEmail(),
                 req.getName(), com.epam.oleg.business.entities.UserRole.valueOf(req.getUserRole().value()),
                 com.epam.oleg.business.entities.Gender.valueOf(req.getGender().value()),
-                req.getCity(), req.getAge().intValue())
+                req.getCity(), req.getAge())
                 .stream()
                 .map(e -> mapper.map(e, User.class))
                 .collect(Collectors.toList()));
@@ -47,7 +47,7 @@ public class UserEndpoint {
     public GetUserResponse createUser(@RequestPayload CreateUserRequest req) {
         GetUserResponse response = new GetUserResponse();
         com.epam.oleg.business.entities.User user = new com.epam.oleg.business.entities.User();
-        user.setAge(req.getAge().intValue());
+        user.setAge(req.getAge());
         user.setBalance(req.getBalance());
         user.setCity(req.getCity());
         user.setEmail(req.getEmail());
@@ -68,7 +68,7 @@ public class UserEndpoint {
         GetUserResponse response = new GetUserResponse();
         com.epam.oleg.business.entities.User user = new com.epam.oleg.business.entities.User();
         user.setId(req.getId());
-        user.setAge(req.getAge().intValue());
+        user.setAge(req.getAge());
         user.setBalance(req.getBalance());
         user.setCity(req.getCity());
         user.setEmail(req.getEmail());

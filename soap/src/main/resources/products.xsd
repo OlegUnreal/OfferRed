@@ -4,7 +4,7 @@
     <xs:element name="getProductRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="product" type="tns:product"/>
+                <xs:element name="id" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -17,12 +17,62 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getProductsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="category" type="tns:productCategory"/>
+                <xs:element name="price" type="xs:int"/>
+                <xs:element name="ownerId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getProductsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="productList" type="tns:product" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="category" type="tns:productCategory"/>
+                <xs:element name="price" type="xs:int"/>
+                <xs:element name="ownerId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="category" type="tns:productCategory"/>
+                <xs:element name="price" type="xs:int"/>
+                <xs:element name="ownerId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="product">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="name" type="xs:string"/>
             <xs:element name="category" type="tns:productCategory"/>
-            <xs:element name="price" type="xs:integer"/>
+            <xs:element name="price" type="xs:int"/>
             <xs:element name="productOwner" type="tns:user"/>
         </xs:sequence>
     </xs:complexType>

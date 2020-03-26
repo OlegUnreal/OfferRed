@@ -1,6 +1,7 @@
 package com.epam.oleg.business.service.impl;
 
 import com.epam.oleg.business.entities.Product;
+import com.epam.oleg.business.entities.ProductCategory;
 import com.epam.oleg.business.exception.NotFoundException;
 import com.epam.oleg.business.repository.ProductCriteria;
 import com.epam.oleg.business.repository.ProductRepository;
@@ -21,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductCriteria productCriteria;
 
     @Override
-    public List<Product> findAll(String name, String category, Integer price, String productOwner) {
+    public List<Product> findAll(String name, ProductCategory category, Integer price, String productOwner) {
         return productCriteria.findAll(name, category, price, productOwner);
     }
 

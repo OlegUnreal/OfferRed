@@ -1,6 +1,7 @@
 package com.epam.oleg.business.repository;
 
 import com.epam.oleg.business.entities.Lot;
+import com.epam.oleg.business.entities.LotStatus;
 import com.epam.oleg.business.entities.Offer;
 import com.epam.oleg.business.entities.User;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class LotCriteria {
     private final EntityManager entityManager;
 
-    public List<Lot> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice, String status,
+    public List<Lot> findAll(Integer startedPrice, Integer currentPrice, Integer finalPrice, LotStatus status,
                              String offerId, String ownerId) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Lot> cq = cb.createQuery(Lot.class);
@@ -37,7 +38,7 @@ public class LotCriteria {
             Predicate finalPricePredicate = cb.equal(lot.get("finalPrice"), finalPrice);
             cq.where(finalPricePredicate);
         }
-        if (isNotEmpty(status)) {
+        if (status != null) {
             Predicate statusPredicate = cb.equal(lot.get("status"), status);
             cq.where(statusPredicate);
         }

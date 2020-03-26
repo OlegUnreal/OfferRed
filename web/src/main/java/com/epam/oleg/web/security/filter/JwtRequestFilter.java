@@ -1,7 +1,7 @@
-package com.epam.oleg.business.filter;
+package com.epam.oleg.web.security.filter;
 
-import com.epam.oleg.business.security.JwtUserDetailsService;
-import com.epam.oleg.business.utils.JwtUtil;
+import com.epam.oleg.web.security.JwtUserDetailsService;
+import com.epam.oleg.web.security.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

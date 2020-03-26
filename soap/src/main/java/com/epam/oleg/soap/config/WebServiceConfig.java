@@ -1,4 +1,4 @@
-package com.olegkornii.soap.soap.config;
+package com.epam.oleg.soap.config;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;

@@ -1,6 +1,7 @@
 package com.epam.oleg.business.service;
 
 import com.epam.oleg.business.entities.Offer;
+import com.epam.oleg.business.entities.OfferStatus;
 import com.epam.oleg.business.entities.User;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Service
 public interface OfferService {
 
-    List<Offer> findAll(String offerStatus, String offerOwner, String productId);
+    List<Offer> findAll(OfferStatus offerStatus, String offerOwner, String productId);
 
     Offer getById(String id);
 

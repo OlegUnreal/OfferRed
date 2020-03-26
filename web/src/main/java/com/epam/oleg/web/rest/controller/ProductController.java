@@ -1,8 +1,8 @@
 package com.epam.oleg.web.rest.controller;
 
 import com.epam.oleg.business.entities.Product;
+import com.epam.oleg.business.entities.ProductCategory;
 import com.epam.oleg.business.entities.User;
-import com.epam.oleg.business.repository.ProductCriteria;
 import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.business.service.UserService;
 import com.epam.oleg.web.hateos.assembler.ProductModelAssembler;
@@ -33,7 +33,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public CollectionModel<ProductModel> getAll(@PageableDefault Pageable pageable,
                                                 @RequestParam(required = false) String name,
-                                                @RequestParam(required = false) String category,
+                                                @RequestParam(required = false) ProductCategory category,
                                                 @RequestParam(required = false) Integer price,
                                                 @RequestParam(required = false) String productOwner) {
         return assembler.toCollectionModel(productService.findAll(name, category, price, productOwner));

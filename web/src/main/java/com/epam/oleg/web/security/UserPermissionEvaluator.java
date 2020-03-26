@@ -1,4 +1,4 @@
-package com.epam.oleg.business.security;
+package com.epam.oleg.web.security;
 
 import com.epam.oleg.business.common.OperationTypes;
 import com.epam.oleg.business.entities.Offer;

@@ -1,7 +1,7 @@
-package com.epam.oleg.business.config;
+package com.epam.oleg.web.security.config;
 
-import com.epam.oleg.business.filter.JwtRequestFilter;
-import com.epam.oleg.business.security.JwtAuthenticationEntryPoint;
+import com.epam.oleg.web.security.filter.JwtRequestFilter;
+import com.epam.oleg.web.security.JwtAuthenticationEntryPoint;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

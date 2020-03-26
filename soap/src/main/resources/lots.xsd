@@ -5,7 +5,7 @@
     <xs:element name="getLotRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="lot" type="tns:lot"/>
+                <xs:element name="id" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -18,12 +18,55 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getLotsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="startedPrice" type="xs:int"/>
+                <xs:element name="currentPrice" type="xs:int"/>
+                <xs:element name="finalPrice" type="xs:int"/>
+                <xs:element name="lotStatus" type="tns:lotStatus"/>
+                <xs:element name="ownerId" type="xs:string"/>
+                <xs:element name="offerId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getLotsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lot" type="tns:lot" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateLotRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="startedPrice" type="xs:int"/>
+                <xs:element name="currentPrice" type="xs:int"/>
+                <xs:element name="finalPrice" type="xs:int"/>
+                <xs:element name="lotStatus" type="tns:lotStatus"/>
+                <xs:element name="ownerId" type="xs:string"/>
+                <xs:element name="offerId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteLotRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="lot">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
-            <xs:element name="startedPrice" type="xs:integer"/>
-            <xs:element name="currentPrice" type="xs:integer"/>
-            <xs:element name="finalPrice" type="xs:integer"/>
+            <xs:element name="startedPrice" type="xs:int"/>
+            <xs:element name="currentPrice" type="xs:int"/>
+            <xs:element name="finalPrice" type="xs:int"/>
             <xs:element name="lotStatus" type="tns:lotStatus"/>
             <xs:element name="lotOwner" type="tns:user"/>
             <xs:element name="offer" type="tns:offer"/>

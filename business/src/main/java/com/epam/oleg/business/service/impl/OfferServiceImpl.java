@@ -26,7 +26,7 @@ public class OfferServiceImpl implements OfferService {
     private final OfferCriteria offerCriteria;
 
     @Override
-    public List<Offer> findAll(String offerStatus, String offerOwner, String productId) {
+    public List<Offer> findAll(OfferStatus offerStatus, String offerOwner, String productId) {
         return offerCriteria.findAll(offerStatus, offerOwner, productId);
     }
 

@@ -36,7 +36,7 @@ public class OfferEndpoint {
     }
 
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOfferRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOffersRequest")
     public GetOffersResponse getOffers(@RequestPayload GetOffersRequest req) {
         GetOffersResponse response = new GetOffersResponse();
         response.getOfferList().addAll(offerService.findAll(OfferStatus.valueOf(req.getOfferStatus().value()),

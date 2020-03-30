@@ -2,6 +2,7 @@ package com.epam.oleg.soap.endpoint;
 
 import com.epam.oleg.business.service.ProductService;
 import com.epam.oleg.business.service.UserService;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import io.spring.guides.gs_producing_web_service.*;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class ProductEndpoint {
     private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
     private final ProductService productService;
     private final UserService userService;
-    private final Mapper mapper;
+    private final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductRequest")

@@ -33,11 +33,12 @@ public class OfferClient extends WebServiceGatewaySupport {
     }
 
     public GetOfferResponse updateOffer(OfferDTO req) {
-        UpdateOfferRequest createOfferRequest = new UpdateOfferRequest();
-        createOfferRequest.setOfferStatus(OfferStatus.fromValue(req.getOfferStatus()));
-        createOfferRequest.setOwnerId(req.getOwnerId());
-        createOfferRequest.setPrice(req.getPrice());
-        createOfferRequest.getProductIds().addAll(req.getProductIds());
+        UpdateOfferRequest updateOfferRequest = new UpdateOfferRequest();
+        updateOfferRequest.setId(req.getId());
+        updateOfferRequest.setOfferStatus(OfferStatus.fromValue(req.getOfferStatus()));
+        updateOfferRequest.setOwnerId(req.getOwnerId());
+        updateOfferRequest.setPrice(req.getPrice());
+        updateOfferRequest.getProductIds().addAll(req.getProductIds());
 
         return (GetOfferResponse) getWebServiceTemplate().marshalSendAndReceive(req);
     }

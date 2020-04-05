@@ -41,6 +41,7 @@ public class UserClient extends WebServiceGatewaySupport {
 
     public GetUserResponse updateUser(UserDTO req) {
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
+        updateUserRequest.setId(req.getId());
         updateUserRequest.setAge(req.getAge());
         updateUserRequest.setBalance(req.getBalance());
         updateUserRequest.setCity(req.getCity());

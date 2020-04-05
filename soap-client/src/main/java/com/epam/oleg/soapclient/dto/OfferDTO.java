@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class OfferDTO {
+    private String id;
     private String offerStatus;
     private String ownerId;
     private List<String> productIds;

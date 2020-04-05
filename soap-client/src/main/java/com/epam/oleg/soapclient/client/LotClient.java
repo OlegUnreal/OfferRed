@@ -34,6 +34,7 @@ public class LotClient extends WebServiceGatewaySupport {
 
     public GetLotResponse updateLot(LotDTO req) {
         UpdateLotRequest updateLotRequest = new UpdateLotRequest();
+        updateLotRequest.setId(req.getId());
         updateLotRequest.setCurrentPrice(req.getCurrentPrice());
         updateLotRequest.setFinalPrice(req.getFinalPrice());
         updateLotRequest.setLotStatus(LotStatus.fromValue(req.getLotStatus()));

@@ -35,6 +35,7 @@ public class ProductClient extends WebServiceGatewaySupport {
 
     public GetProductResponse updateProduct(ProductDTO req) {
         UpdateProductRequest updateProductRequest = new UpdateProductRequest();
+        updateProductRequest.setId(req.getId());
         updateProductRequest.setCategory(ProductCategory.fromValue(req.getCategory()));
         updateProductRequest.setName(req.getName());
         updateProductRequest.setOwnerId(req.getOwnerId());

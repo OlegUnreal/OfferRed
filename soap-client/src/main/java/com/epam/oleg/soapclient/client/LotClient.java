@@ -3,13 +3,7 @@ package com.epam.oleg.soapclient.client;
 import com.epam.oleg.soapclient.dto.LotDTO;
 import com.epam.oleg.soapclient.dto.SearchLotsRequest;
 import com.oleg.epam.soapclient.*;
-import org.opensaml.xmlsec.signature.G;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
-import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-
-import java.util.stream.Collectors;
 
 public class LotClient extends WebServiceGatewaySupport {
 

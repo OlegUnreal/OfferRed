@@ -1,6 +1,5 @@
 package com.epam.oleg.soapclient.dto;
 
-import com.oleg.epam.soapclient.LotStatus;
 import lombok.Data;
 
 @Data

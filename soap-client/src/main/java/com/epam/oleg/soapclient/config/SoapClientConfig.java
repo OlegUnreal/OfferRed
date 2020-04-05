@@ -1,4 +1,4 @@
-package com.epam.oleg.soapclient.congfig;
+package com.epam.oleg.soapclient.config;
 
 import com.epam.oleg.soapclient.client.UserClient;
 import org.springframework.context.annotation.Bean;

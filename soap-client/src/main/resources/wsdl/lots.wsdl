@@ -1,0 +1,148 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://spring.io/guides/gs-producing-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://spring.io/guides/gs-producing-web-service" targetNamespace="http://spring.io/guides/gs-producing-web-service">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://spring.io/guides/gs-producing-web-service">
+            <xs:element name="getLotRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLotResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="lot" type="tns:lot"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLotsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="startedPrice" type="xs:int"/>
+                        <xs:element name="currentPrice" type="xs:int"/>
+                        <xs:element name="finalPrice" type="xs:int"/>
+                        <xs:element name="lotStatus" type="tns:lotStatus"/>
+                        <xs:element name="ownerId" type="xs:string"/>
+                        <xs:element name="offerId" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLotsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="lot" type="tns:lot"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateLotRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                        <xs:element name="startedPrice" type="xs:int"/>
+                        <xs:element name="currentPrice" type="xs:int"/>
+                        <xs:element name="finalPrice" type="xs:int"/>
+                        <xs:element name="lotStatus" type="tns:lotStatus"/>
+                        <xs:element name="ownerId" type="xs:string"/>
+                        <xs:element name="offerId" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteLotRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="lot">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="startedPrice" type="xs:int"/>
+                    <xs:element name="currentPrice" type="xs:int"/>
+                    <xs:element name="finalPrice" type="xs:int"/>
+                    <xs:element name="lotStatus" type="tns:lotStatus"/>
+                    <xs:element name="lotOwner" type="tns:user"/>
+                    <xs:element name="offer" type="tns:offer"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="lotStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="OPEN"/>
+                    <xs:enumeration value="SOLD"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getLotsRequest">
+        <wsdl:part element="tns:getLotsRequest" name="getLotsRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getLotsResponse">
+        <wsdl:part element="tns:getLotsResponse" name="getLotsResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getLotRequest">
+        <wsdl:part element="tns:getLotRequest" name="getLotRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteLotRequest">
+        <wsdl:part element="tns:deleteLotRequest" name="deleteLotRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="updateLotRequest">
+        <wsdl:part element="tns:updateLotRequest" name="updateLotRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getLotResponse">
+        <wsdl:part element="tns:getLotResponse" name="getLotResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="LotsPort">
+        <wsdl:operation name="getLots">
+            <wsdl:input message="tns:getLotsRequest" name="getLotsRequest"> </wsdl:input>
+            <wsdl:output message="tns:getLotsResponse" name="getLotsResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getLot">
+            <wsdl:input message="tns:getLotRequest" name="getLotRequest"> </wsdl:input>
+            <wsdl:output message="tns:getLotResponse" name="getLotResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteLot">
+            <wsdl:input message="tns:deleteLotRequest" name="deleteLotRequest"> </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateLot">
+            <wsdl:input message="tns:updateLotRequest" name="updateLotRequest"> </wsdl:input>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="LotsPortSoap11" type="tns:LotsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getLots">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getLotsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getLotsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getLot">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getLotRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getLotResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteLot">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="deleteLotRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateLot">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="updateLotRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="LotsPortService">
+        <wsdl:port binding="tns:LotsPortSoap11" name="LotsPortSoap11">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

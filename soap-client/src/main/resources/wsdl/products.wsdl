@@ -1,0 +1,166 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://spring.io/guides/gs-producing-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://spring.io/guides/gs-producing-web-service" targetNamespace="http://spring.io/guides/gs-producing-web-service">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://spring.io/guides/gs-producing-web-service">
+            <xs:element name="getProductRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getProductResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="product" type="tns:product"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getProductsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="category" type="tns:productCategory"/>
+                        <xs:element name="price" type="xs:int"/>
+                        <xs:element name="ownerId" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getProductsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="productList" type="tns:product"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createProductRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="category" type="tns:productCategory"/>
+                        <xs:element name="price" type="xs:int"/>
+                        <xs:element name="ownerId" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateProductRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="category" type="tns:productCategory"/>
+                        <xs:element name="price" type="xs:int"/>
+                        <xs:element name="ownerId" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteProductRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="product">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="category" type="tns:productCategory"/>
+                    <xs:element name="price" type="xs:int"/>
+                    <xs:element name="productOwner" type="tns:user"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="productCategory">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="COMPUTER"/>
+                    <xs:enumeration value="PHONE"/>
+                    <xs:enumeration value="HEADPHONES"/>
+                    <xs:enumeration value="EQUIPMENT"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="deleteProductRequest">
+        <wsdl:part element="tns:deleteProductRequest" name="deleteProductRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductsResponse">
+        <wsdl:part element="tns:getProductsResponse" name="getProductsResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductRequest">
+        <wsdl:part element="tns:getProductRequest" name="getProductRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createProductRequest">
+        <wsdl:part element="tns:createProductRequest" name="createProductRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="updateProductRequest">
+        <wsdl:part element="tns:updateProductRequest" name="updateProductRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductResponse">
+        <wsdl:part element="tns:getProductResponse" name="getProductResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductsRequest">
+        <wsdl:part element="tns:getProductsRequest" name="getProductsRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="productsPort">
+        <wsdl:operation name="deleteProduct">
+            <wsdl:input message="tns:deleteProductRequest" name="deleteProductRequest"> </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="getProducts">
+            <wsdl:input message="tns:getProductsRequest" name="getProductsRequest"> </wsdl:input>
+            <wsdl:output message="tns:getProductsResponse" name="getProductsResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getProduct">
+            <wsdl:input message="tns:getProductRequest" name="getProductRequest"> </wsdl:input>
+            <wsdl:output message="tns:getProductResponse" name="getProductResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createProduct">
+            <wsdl:input message="tns:createProductRequest" name="createProductRequest"> </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateProduct">
+            <wsdl:input message="tns:updateProductRequest" name="updateProductRequest"> </wsdl:input>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="productsPortSoap11" type="tns:productsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="deleteProduct">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="deleteProductRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="getProducts">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getProductsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getProductsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getProduct">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getProductRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getProductResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createProduct">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="createProductRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="updateProduct">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="updateProductRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="productsPortService">
+        <wsdl:port binding="tns:productsPortSoap11" name="productsPortSoap11">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,6 +1,5 @@
 package com.epam.oleg.soapclient.dto;
 
-import com.oleg.epam.soapclient.ProductCategory;
 import lombok.Data;
 
 @Data

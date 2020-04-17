@@ -32,9 +32,11 @@ public class UserEndpoint {
     public GetUsersResponse getUsers(@RequestPayload GetUsersRequest req) {
         GetUsersResponse response = new GetUsersResponse();
         final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
+        final Gender gender = req.getGender();
+        final UserRole userRole = req.getUserRole();
         response.getUserList().addAll(userService.findAll(req.getEmail(),
-                req.getName(), com.epam.oleg.business.entities.UserRole.valueOf(req.getUserRole().value()),
-                com.epam.oleg.business.entities.Gender.valueOf(req.getGender().value()),
+                req.getName(), userRole == null ? null : com.epam.oleg.business.entities.UserRole.valueOf(userRole.value()),
+                gender == null ? null : com.epam.oleg.business.entities.Gender.valueOf(gender.value()),
                 req.getCity(), req.getAge())
                 .stream()
                 .map(e -> mapper.map(e, User.class))
@@ -51,10 +53,12 @@ public class UserEndpoint {
         user.setBalance(req.getBalance());
         user.setCity(req.getCity());
         user.setEmail(req.getEmail());
-        user.setGender(com.epam.oleg.business.entities.Gender.valueOf(req.getGender().value()));
+        final Gender gender = req.getGender();
+        user.setGender(gender == null ? null : com.epam.oleg.business.entities.Gender.valueOf(gender.value()));
         user.setName(req.getName());
         user.setPassword(req.getPassword());
-        user.setUserRole(com.epam.oleg.business.entities.UserRole.valueOf(req.getUserRole().value()));
+        final UserRole userRole = req.getUserRole();
+        user.setUserRole(userRole == null ? null : com.epam.oleg.business.entities.UserRole.valueOf(userRole.value()));
 
         final com.epam.oleg.business.entities.User createdUser = userService.create(user);
         response.setUser(DozerBeanMapperBuilder.buildDefault().map(createdUser, User.class));
@@ -72,9 +76,11 @@ public class UserEndpoint {
         user.setBalance(req.getBalance());
         user.setCity(req.getCity());
         user.setEmail(req.getEmail());
-        user.setGender(com.epam.oleg.business.entities.Gender.valueOf(req.getGender().value()));
+        final Gender gender = req.getGender();
+        user.setGender(gender == null ? null : com.epam.oleg.business.entities.Gender.valueOf(gender.value()));
         user.setName(req.getName());
-        user.setUserRole(com.epam.oleg.business.entities.UserRole.valueOf(req.getUserRole().value()));
+        final UserRole userRole = req.getUserRole();
+        user.setUserRole(userRole == null ? null : com.epam.oleg.business.entities.UserRole.valueOf(userRole.value()));
         response.setUser(DozerBeanMapperBuilder.buildDefault().map(userService.update(user), User.class));
 
         return response;

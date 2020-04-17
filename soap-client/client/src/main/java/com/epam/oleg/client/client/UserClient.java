@@ -20,10 +20,12 @@ public class UserClient extends WebServiceGatewaySupport {
         getUsersRequest.setBalance(request.getBalance());
         getUsersRequest.setCity(request.getCity());
         getUsersRequest.setEmail(request.getEmail());
-        getUsersRequest.setGender(Gender.fromValue(request.getGender()));
+        final String gender = request.getGender();
+        getUsersRequest.setGender(gender == null ? null : Gender.fromValue(gender));
         getUsersRequest.setName(getUsersRequest.getName());
-        getUsersRequest.setUserRole(UserRole.fromValue(request.getUserRole()));
-        return (GetUsersResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+        final String userRole = request.getUserRole();
+        getUsersRequest.setUserRole(userRole == null ? null : UserRole.fromValue(userRole));
+        return (GetUsersResponse) getWebServiceTemplate().marshalSendAndReceive(getUsersRequest);
     }
 
     public GetUserResponse createUser(UserDTO req) {
@@ -32,11 +34,13 @@ public class UserClient extends WebServiceGatewaySupport {
         createUserRequest.setBalance(req.getBalance());
         createUserRequest.setCity(req.getCity());
         createUserRequest.setEmail(req.getEmail());
-        createUserRequest.setGender(Gender.fromValue(req.getGender()));
+        final String gender = req.getGender();
+        createUserRequest.setGender(gender == null ? null : Gender.fromValue(gender));
         createUserRequest.setName(req.getName());
         createUserRequest.setPassword(req.getPassword());
-        createUserRequest.setUserRole(UserRole.fromValue(req.getUserRole()));
-        return (GetUserResponse) getWebServiceTemplate().marshalSendAndReceive(req);
+        final String userRole = req.getUserRole();
+        createUserRequest.setUserRole(userRole == null ? null : UserRole.fromValue(userRole));
+        return (GetUserResponse) getWebServiceTemplate().marshalSendAndReceive(createUserRequest);
     }
 
     public GetUserResponse updateUser(UserDTO req) {
@@ -46,11 +50,13 @@ public class UserClient extends WebServiceGatewaySupport {
         updateUserRequest.setBalance(req.getBalance());
         updateUserRequest.setCity(req.getCity());
         updateUserRequest.setEmail(req.getEmail());
-        updateUserRequest.setGender(Gender.fromValue(req.getGender()));
+        final String gender = req.getGender();
+        updateUserRequest.setGender(gender == null ? null : Gender.fromValue(gender));
         updateUserRequest.setName(req.getName());
-        updateUserRequest.setUserRole(UserRole.fromValue(req.getUserRole()));
+        final String userRole = req.getUserRole();
+        updateUserRequest.setUserRole(userRole == null ? null : UserRole.fromValue(userRole));
 
-        return (GetUserResponse) getWebServiceTemplate().marshalSendAndReceive(req);
+        return (GetUserResponse) getWebServiceTemplate().marshalSendAndReceive(updateUserRequest);
     }
 
     public DeleteUserResponse delete(String id) {

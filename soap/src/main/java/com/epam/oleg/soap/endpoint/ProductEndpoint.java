@@ -34,8 +34,9 @@ public class ProductEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductsRequest")
     public GetProductsResponse getProducts(@RequestPayload GetProductsRequest req) {
         GetProductsResponse response = new GetProductsResponse();
+        final ProductCategory category = req.getCategory();
         response.getProductList().addAll(productService.findAll(req.getName(),
-                com.epam.oleg.business.entities.ProductCategory.valueOf(req.getCategory().value()),
+                category == null ? null : com.epam.oleg.business.entities.ProductCategory.valueOf(category.value()),
                 req.getPrice(),
                 req.getOwnerId())
                 .stream()
@@ -49,7 +50,8 @@ public class ProductEndpoint {
     public GetProductResponse createProduct(@RequestPayload CreateProductRequest req) {
         GetProductResponse response = new GetProductResponse();
         com.epam.oleg.business.entities.Product product = new com.epam.oleg.business.entities.Product();
-        product.setCategory(com.epam.oleg.business.entities.ProductCategory.valueOf(req.getCategory().value()));
+        final ProductCategory category = req.getCategory();
+        product.setCategory(category == null ? null : com.epam.oleg.business.entities.ProductCategory.valueOf(category.value()));
         product.setName(req.getName());
         product.setProductOwner(userService.getById(req.getOwnerId()));
         product.setPrice(req.getPrice());
@@ -64,7 +66,8 @@ public class ProductEndpoint {
     public GetProductResponse updateProduct(@RequestPayload CreateProductRequest req) {
         GetProductResponse response = new GetProductResponse();
         com.epam.oleg.business.entities.Product product = new com.epam.oleg.business.entities.Product();
-        product.setCategory(com.epam.oleg.business.entities.ProductCategory.valueOf(req.getCategory().value()));
+        final ProductCategory category = req.getCategory();
+        product.setCategory(category == null ? null : com.epam.oleg.business.entities.ProductCategory.valueOf(category.value()));
         product.setName(req.getName());
         product.setProductOwner(userService.getById(req.getOwnerId()));
         product.setPrice(req.getPrice());

@@ -40,10 +40,11 @@ public class LotEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getLotsRequest")
     public GetLotsResponse getLots(@RequestPayload GetLotsRequest req) {
         GetLotsResponse response = new GetLotsResponse();
+        final LotStatus lotStatus = req.getLotStatus();
         response.getLot().addAll(lotService.findAll(req.getStartedPrice(),
                 req.getCurrentPrice(),
                 req.getFinalPrice(),
-                com.epam.oleg.business.entities.LotStatus.valueOf(req.getLotStatus().value()),
+                lotStatus == null ? null : com.epam.oleg.business.entities.LotStatus.valueOf(lotStatus.value()),
                 req.getOfferId(),
                 req.getOwnerId())
                 .stream()

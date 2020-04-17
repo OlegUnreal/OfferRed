@@ -17,7 +17,8 @@ public class ProductClient extends WebServiceGatewaySupport {
     public GetProductsResponse getProducts(ProductSearchRequest req) {
         GetProductsRequest getProductsRequest = new GetProductsRequest();
         getProductsRequest.setName(req.getName());
-        getProductsRequest.setCategory(ProductCategory.fromValue(req.getCategory()));
+        final String category = req.getCategory();
+        getProductsRequest.setCategory(category == null ? null : ProductCategory.fromValue(category));
         getProductsRequest.setOwnerId(req.getOwnerId());
         getProductsRequest.setPrice(req.getPrice());
         return (GetProductsResponse) getWebServiceTemplate().marshalSendAndReceive(getProductsRequest);
@@ -25,18 +26,20 @@ public class ProductClient extends WebServiceGatewaySupport {
 
     public GetProductResponse createProduct(ProductDTO req) {
         CreateProductRequest createProductRequest = new CreateProductRequest();
-        createProductRequest.setCategory(ProductCategory.fromValue(req.getCategory()));
+        final String category = req.getCategory();
+        createProductRequest.setCategory(category == null ? null : ProductCategory.fromValue(category));
         createProductRequest.setName(req.getName());
         createProductRequest.setOwnerId(req.getOwnerId());
         createProductRequest.setPrice(req.getPrice());
 
-        return (GetProductResponse) getWebServiceTemplate().marshalSendAndReceive(req);
+        return (GetProductResponse) getWebServiceTemplate().marshalSendAndReceive(createProductRequest);
     }
 
     public GetProductResponse updateProduct(ProductDTO req) {
         UpdateProductRequest updateProductRequest = new UpdateProductRequest();
         updateProductRequest.setId(req.getId());
-        updateProductRequest.setCategory(ProductCategory.fromValue(req.getCategory()));
+        final String category = req.getCategory();
+        updateProductRequest.setCategory(category == null ? null : ProductCategory.fromValue(category));
         updateProductRequest.setName(req.getName());
         updateProductRequest.setOwnerId(req.getOwnerId());
         updateProductRequest.setPrice(req.getPrice());

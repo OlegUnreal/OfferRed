@@ -55,7 +55,8 @@ public class OfferEndpoint {
         GetOfferResponse response = new GetOfferResponse();
         Offer offer = new Offer();
         offer.setOfferOwner(userService.getById(req.getOwnerId()));
-        offer.setOfferStatus(OfferStatus.valueOf(req.getOfferStatus().value()));
+        final io.spring.guides.gs_producing_web_service.OfferStatus offerStatus = req.getOfferStatus();
+        offer.setOfferStatus(offerStatus == null ? null : OfferStatus.valueOf(offerStatus.value()));
         offer.setProducts(req.getProductIds()
                 .stream().map(productService::getById)
                 .collect(Collectors.toList()));
@@ -74,7 +75,8 @@ public class OfferEndpoint {
         Offer offer = new Offer();
         offer.setId(req.getId());
         offer.setOfferOwner(userService.getById(req.getOwnerId()));
-        offer.setOfferStatus(OfferStatus.valueOf(req.getOfferStatus().value()));
+        final io.spring.guides.gs_producing_web_service.OfferStatus offerStatus = req.getOfferStatus();
+        offer.setOfferStatus(offerStatus == null ? null : OfferStatus.valueOf(offerStatus.value()));
         offer.setProducts(req.getProductIds()
                 .stream().map(productService::getById)
                 .collect(Collectors.toList()));

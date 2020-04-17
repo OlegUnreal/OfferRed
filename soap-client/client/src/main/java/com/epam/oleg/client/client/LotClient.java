@@ -18,7 +18,8 @@ public class LotClient extends WebServiceGatewaySupport {
         GetLotsRequest getLotsRequest = new GetLotsRequest();
         getLotsRequest.setCurrentPrice(req.getCurrentPrice());
         getLotsRequest.setFinalPrice(req.getFinalPrice());
-        getLotsRequest.setLotStatus(LotStatus.fromValue(req.getLotStatus()));
+        final String lotStatus = req.getLotStatus();
+        getLotsRequest.setLotStatus(lotStatus == null ? null : LotStatus.fromValue(lotStatus));
         getLotsRequest.setOfferId(req.getOfferId());
         getLotsRequest.setOwnerId(req.getOwnerId());
         getLotsRequest.setStartedPrice(req.getStartedPrice());
@@ -31,7 +32,8 @@ public class LotClient extends WebServiceGatewaySupport {
         updateLotRequest.setId(req.getId());
         updateLotRequest.setCurrentPrice(req.getCurrentPrice());
         updateLotRequest.setFinalPrice(req.getFinalPrice());
-        updateLotRequest.setLotStatus(LotStatus.fromValue(req.getLotStatus()));
+        final String lotStatus = req.getLotStatus();
+        updateLotRequest.setLotStatus(lotStatus == null ? null : LotStatus.fromValue(lotStatus));
         updateLotRequest.setOfferId(req.getOfferId());
         updateLotRequest.setOwnerId(req.getOwnerId());
         updateLotRequest.setStartedPrice(req.getStartedPrice());
